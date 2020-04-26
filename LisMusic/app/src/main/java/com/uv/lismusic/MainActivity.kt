@@ -27,10 +27,10 @@ class MainActivity : AppCompatActivity() {
         private val mContext: Context
 
         private val namesTracks = arrayListOf<String>(
-            "Soliá","Diles","Everyday","Good News","Heartless"
+            "Soliá","Diles","Everyday","Good News","Heartless", "Canción 6", "Canción 7", "Canción 8","Canción 6", "Canción 7", "Canción 8"
         )
         private val namesArtist = arrayListOf<String>(
-            "Bad Bunny", "Rels B", "Logic", "Mac Miller", "The Weeknd"
+            "Bad Bunny", "Rels B", "Logic", "Mac Miller", "The Weeknd", "Artista 6", "Artista 7", "Artista 8", "Artista 6", "Artista 7", "Artista 8"
         )
         init {
             mContext = context
