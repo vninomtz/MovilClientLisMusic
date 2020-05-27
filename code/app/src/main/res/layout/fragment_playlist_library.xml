@@ -6,9 +6,9 @@
     tools:context=".ui.library.PlaylistLibraryFragment">
 
 
-    <ListView
-        android:id="@+id/listView_playlist_library"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_playlist_library"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"/>
+        android:layout_height="wrap_content" />
+
 </RelativeLayout>
