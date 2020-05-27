@@ -32,9 +32,9 @@ jobs:
         java-version: 1.8
     
     - name: Give permissions
-      run: chmod +x ./code/gradlew
+      run: cd code && chmod +x ./gradlew
     - name: Build debug APK
-      run: sudo bash ./code/gradlew assembleDebug --stacktrace
+      run: bash ./gradlew assembleDebug --stacktrace
     - name: Upload APK
       uses: actions/upload-artifact@v1
       with:
