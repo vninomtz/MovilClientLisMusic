@@ -21,5 +21,30 @@
         android:id="@+id/navigation_library"
         android:name="com.uv.lismusicjava.ui.library.LibraryFragment"
         android:label="@string/library"
-        tools:layout="@layout/fragment_library" />
+        tools:layout="@layout/fragment_library" >
+        <action
+            android:id="@+id/action_navigation_library_to_playlistLibraryFragment"
+            app:destination="@id/navigation_playlistLibraryFragment" />
+        <action
+            android:id="@+id/action_navigation_library_to_artistLibraryFragment"
+            app:destination="@id/navigation_artistLibraryFragment" />
+        <action
+            android:id="@+id/action_navigation_library_to_albumLibraryFragment"
+            app:destination="@id/navigation_albumLibraryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_playlistLibraryFragment"
+        android:name="com.uv.lismusicjava.ui.library.PlaylistLibraryFragment"
+        android:label="fragment_playlist_library"
+        tools:layout="@layout/fragment_playlist_library" />
+    <fragment
+        android:id="@+id/navigation_artistLibraryFragment"
+        android:name="com.uv.lismusicjava.ui.library.ArtistLibraryFragment"
+        android:label="fragment_artist_library"
+        tools:layout="@layout/fragment_artist_library" />
+    <fragment
+        android:id="@+id/navigation_albumLibraryFragment"
+        android:name="com.uv.lismusicjava.ui.library.AlbumLibraryFragment"
+        android:label="fragment_album_library"
+        tools:layout="@layout/fragment_album_library" />
 </navigation>
