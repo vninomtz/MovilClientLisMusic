@@ -34,7 +34,7 @@ jobs:
     - name: Give permissions
       run: chmod +x ./code/gradlew
     - name: Build debug APK
-      run: bash ./code/gradlew assembleDebug --stacktrace
+      run: sudo bash ./code/gradlew assembleDebug --stacktrace
     - name: Upload APK
       uses: actions/upload-artifact@v1
       with:
