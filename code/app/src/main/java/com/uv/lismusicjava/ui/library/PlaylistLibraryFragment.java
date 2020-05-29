@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +17,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.uv.lismusicjava.R;
 import com.uv.lismusicjava.domain.Playlist;
+import com.uv.lismusicjava.jsonmanagement.GsonRequest;
+import com.uv.lismusicjava.jsonmanagement.SingletonRequestQueue;
+import com.uv.lismusicjava.models.Track;
 import com.uv.lismusicjava.ui.library.adapters.PlaylistAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PlaylistLibraryFragment extends Fragment  implements PlaylistAdapter.ListItemClick{
 
@@ -31,14 +40,18 @@ public class PlaylistLibraryFragment extends Fragment  implements PlaylistAdapte
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View viewFragment = inflater.inflate(R.layout.fragment_playlist_library, container, false);
-        listPlaylist = new ArrayList<>();
-        recyclerPlaylist = viewFragment.findViewById(R.id.recyclerView_playlist_library);
-        recyclerPlaylist.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerPlaylist.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         loadPlaylist();
-        PlaylistAdapter adapter = new PlaylistAdapter(listPlaylist, this);
-        recyclerPlaylist.setAdapter(adapter);
+
+        Log.i("Montandoadapter","Montado");
+        listPlaylist = new ArrayList<>();
+
+
+
+        View viewFragment = inflater.inflate(R.layout.fragment_playlist_library, container, false);
+        recyclerPlaylist = viewFragment.findViewById(R.id.recyclerView_playlist_library);
+
+
+
         return viewFragment;
 
 
@@ -46,25 +59,62 @@ public class PlaylistLibraryFragment extends Fragment  implements PlaylistAdapte
     }
 
     private void loadPlaylist() {
-        listPlaylist.add(new Playlist(1, "Canciones que me gustan", "Victor Niño","url"));
-        listPlaylist.add(new Playlist(2, "Canciones que me gustan2", "Victor Niño","url"));
-        listPlaylist.add(new Playlist(3, "Canciones que me gustan3", "Victor Niño","url"));
-        listPlaylist.add(new Playlist(4, "Canciones que me gustan4", "Victor Niño","url"));
-        listPlaylist.add(new Playlist(1, "Canciones que me gustan", "Victor Niño","url"));
-        listPlaylist.add(new Playlist(2, "Canciones que me gustan2", "Victor Niño","url"));
-        listPlaylist.add(new Playlist(3, "Canciones que me gustan3", "Victor Niño","url"));
-        listPlaylist.add(new Playlist(4, "Canciones que me gustan4", "Victor Niño","url"));
-        listPlaylist.add(new Playlist(1, "Canciones que me gustan", "Victor Niño","url"));
-        listPlaylist.add(new Playlist(2, "Canciones que me gustan2", "Victor Niño","url"));
-        listPlaylist.add(new Playlist(3, "Canciones que me gustan3", "Victor Niño","url"));
-        listPlaylist.add(new Playlist(4, "Canciones que me gustan4", "Victor Niño","url"));
+        String url = "https://my-json-server.typicode.com/AlanGlezH/mockjson/playlist";
+        Log.i("Creando request", url);
+        Map mapHeaders = new HashMap <String, String>(); //agregar headers necesarios
+
+        GsonRequest<Playlist[]> requestPlaylist = new GsonRequest<Playlist[]>(
+                url,
+                Playlist[].class,
+                mapHeaders,
+                myRequestSuccessListener(), //Success Listener
+                myRequestErrorListener() //Error Listener
+        );
+
+
+        SingletonRequestQueue.getInstance(getContext()).addToRequestQueue(requestPlaylist);
+
+
+    }
+
+    private Response.Listener<Playlist[]> myRequestSuccessListener() {
+        return new Response.Listener<Playlist[]>() {
+            @Override
+            public void onResponse(Playlist[] response) {
+                handlerGsonResponse(response);
+            }
+
+        };
+    }
+
+    private void handlerGsonResponse(Playlist[] playlist){
+
+        recyclerPlaylist.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerPlaylist.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+
+        for (int i  = 0; i < playlist.length; i++) {
+            listPlaylist.add(playlist[i]);
+
+        }
+        PlaylistAdapter adapter = new PlaylistAdapter(listPlaylist, this,this.getContext());
+        recyclerPlaylist.setAdapter(adapter);
+    }
+
+    private Response.ErrorListener myRequestErrorListener() {
+        return new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("Error", error.toString());
+
+            }
+
+        };
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        /*Bundle args = getArguments();
-        TextView textView = view.findViewById(R.id.text1);
-        textView.setText(Integer.toString(args.getInt(ARG_OBJECT)));*/
+
+
 
 
     }

@@ -1,16 +1,25 @@
 package com.uv.lismusicjava.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Playlist {
     private int id;
     private String name;
     private String owner;
     private String image;
+    public List<Track> trackList;
 
-    public Playlist(int id, String name, String owner, String image) {
+    public Playlist(int id, String name, String owner, String image, List<Track> trackList) {
         this.id = id;
         this.name = name;
         this.owner = owner;
         this.image = image;
+        this.trackList = trackList;
+    }
+
+    public Track getTrack(int position){
+        return trackList.get(position);
     }
 
     public int getId() {
