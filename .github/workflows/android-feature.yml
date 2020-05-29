@@ -21,4 +21,4 @@ jobs:
     - name: Give permissions
       run: chmod +x ./code/gradlew
     - name: Unit tests
-      run: bash ./code/gradlew test --stacktrace
+      run: cd code && bash ./gradlew test --stacktrace
