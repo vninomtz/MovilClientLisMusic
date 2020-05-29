@@ -1,7 +1,6 @@
 package com.uv.lismusicjava.domain;
 
 public class Track {
-<<<<<<< HEAD
     public int id;
     public String name;
     public String artist;
@@ -46,6 +45,5 @@ public class Track {
     public void setImage(String image) {
         this.image = image;
     }
-=======
->>>>>>> master
+
 }
