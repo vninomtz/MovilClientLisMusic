@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LisMusicJava</string>
+    <string name="app_name">LisMusic</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -9,6 +9,10 @@
     <string name="playlists">Playlists</string>
     <string name="artists">Artists</string>
     <string name="albums">Albums</string>
+    <string name="password">Enter your password</string>
+    <string name="email">Enter your email or username</string>
+    <string name="facebook_app_id">566789227366132</string>
+    <string name="fb_login_protocol_scheme">fb566789227366132</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
