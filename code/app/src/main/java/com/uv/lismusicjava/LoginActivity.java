@@ -1,8 +1,11 @@
 package com.uv.lismusicjava;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +19,8 @@ import com.facebook.login.widget.LoginButton;
 public class LoginActivity extends AppCompatActivity {
 
     protected CallbackManager callbackManager;
-
+    private TextView newAccountTextView;
+    private TextView resetPasswordTextView;
 
 
     @Override
@@ -29,6 +33,11 @@ public class LoginActivity extends AppCompatActivity {
 
         principalLogo = findViewById(R.id.principalLogo);
         principalLogo.setImageResource(R.drawable.lismusic3);
+
+        newAccountTextView = findViewById(R.id.newAccount);
+        newAccountTextView.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+        resetPasswordTextView = findViewById(R.id.resetPassword);
+        resetPasswordTextView.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
 
         callbackManager = CallbackManager.Factory.create();
 
@@ -53,6 +62,17 @@ public class LoginActivity extends AppCompatActivity {
     private void goHomeScreen() {
         Intent intent = new Intent(this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+    public void goRegisterAccountScreen(View view){
+        Intent intent = new Intent(this, RegisterAccountActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void goResetPasswordScreen(View view){
+        Intent intent = new Intent(this, ResetPasswordActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 

@@ -12,6 +12,7 @@
     <string name="password">Enter your password</string>
     <string name="email">Enter your email or username</string>
     <string name="new_account">Don´t you have an account? sing up here! </string>
+    <string name="resetPassword">Reset password </string>
     <string name="facebook_app_id">566789227366132</string>
     <string name="fb_login_protocol_scheme">fb566789227366132</string>
 
