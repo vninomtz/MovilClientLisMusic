@@ -65,7 +65,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
             namePlaylist = (TextView) itemView.findViewById(R.id.textView_namePlaylist_playlist_item);
             nameOwner = (TextView) itemView.findViewById(R.id.textView_nameOwner_playlist_item);
             image = (ImageView)  itemView.findViewById(R.id.imageView_playlist_item);
-
             itemView.setOnClickListener(this);
         }
 
