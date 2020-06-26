@@ -52,7 +52,7 @@
         tools:ignore="MissingConstraints">
 
         <EditText
-            android:id="@+id/textPassword"
+            android:id="@+id/textEditPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"

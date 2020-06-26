@@ -15,6 +15,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.uv.lismusicjava.ui.Account.RegisterAccountActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -66,14 +67,14 @@ public class LoginActivity extends AppCompatActivity {
     }
     public void goRegisterAccountScreen(View view){
         Intent intent = new Intent(this, RegisterAccountActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP  | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
     public void goResetPasswordScreen(View view){
-        Intent intent = new Intent(this, ResetPasswordActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+      //  Intent intent = new Intent(this, ResetPasswordActivity.class);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        //startActivity(intent);
     }
 
     @Override

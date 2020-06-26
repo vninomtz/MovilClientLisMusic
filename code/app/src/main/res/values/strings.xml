@@ -16,6 +16,8 @@
     <string name="facebook_app_id">566789227366132</string>
     <string name="fb_login_protocol_scheme">fb566789227366132</string>
 
+    <string name="terms_and_conditions"> Al aceptar los terminos y condiciones de LisMusic nos otorgas el permiso de guardar tus datos ingresado con fines estadísticos para ir mejorando tu experiencia con nosotros.</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
