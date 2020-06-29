@@ -15,6 +15,7 @@
     <string name="resetPassword">Reset password </string>
     <string name="facebook_app_id">566789227366132</string>
     <string name="fb_login_protocol_scheme">fb566789227366132</string>
+    <string name="ip">192.168.1.67</string>
 
     <string name="terms_and_conditions"> Al aceptar los terminos y condiciones de LisMusic nos otorgas el permiso de guardar tus datos ingresado con fines estadísticos para ir mejorando tu experiencia con nosotros.</string>
 
