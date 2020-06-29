@@ -69,6 +69,7 @@
         android:layout_height="51dp"
         android:background="@drawable/textview_shape"
         android:ems="10"
+        android:gravity="center"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
@@ -77,12 +78,12 @@
         app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.401"
-        android:gravity="center"/>
+        app:layout_constraintVertical_bias="0.401" />
 
     <Button
 
         android:id="@+id/btn_login"
+        android:onClick="principalLogin"
         android:layout_width="254dp"
         android:layout_height="46dp"
         android:layout_marginTop="50dp"
@@ -118,13 +119,15 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
         android:layout_marginBottom="8dp"
         android:text="@string/password"
         android:textColor="@color/primaryTextColor"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textEmail" />
 
     <TextView
         android:id="@+id/newAccount"

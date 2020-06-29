@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,19 +7,30 @@
     tools:context=".ui.Account.PopUpTermsAndConditions"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/primaryLightColor">
+    android:background="@color/primaryColor">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@mipmap/ic_launcher_lismusic"/>
+        android:layout_marginTop="56dp"
+        android:src="@mipmap/ic_launcher_lismusic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="202dp"
+        android:layout_width="336dp"
+        android:layout_height="165dp"
+        android:layout_marginTop="52dp"
         android:text="@string/terms_and_conditions"
         android:textAlignment="center"
-        android:textColor="@color/primaryTextColor" />
+        android:textColor="@color/primaryTextColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,17 +45,10 @@ public class PlaylistLibraryFragment extends Fragment  implements PlaylistAdapte
         Log.i("Montandoadapter","Montado");
         listPlaylist = new ArrayList<>();
 
-
-
         View viewFragment = inflater.inflate(R.layout.fragment_playlist_library, container, false);
         recyclerPlaylist = viewFragment.findViewById(R.id.recyclerView_playlist_library);
 
-
-
         return viewFragment;
-
-
-
     }
 
     private void loadPlaylist() {
@@ -70,11 +63,7 @@ public class PlaylistLibraryFragment extends Fragment  implements PlaylistAdapte
                 myRequestSuccessListener(), //Success Listener
                 myRequestErrorListener() //Error Listener
         );
-
-
         SingletonRequestQueue.getInstance(getContext()).addToRequestQueue(requestPlaylist);
-
-
     }
 
     private Response.Listener<Playlist[]> myRequestSuccessListener() {
