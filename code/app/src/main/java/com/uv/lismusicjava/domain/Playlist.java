@@ -8,13 +8,15 @@ public class Playlist {
     private String title;
     private String idAccount;
     private String cover;
+    private String owner;
     public List<Track> trackList;
 
-    public Playlist(int idPlaylist, String title, String idAccount, String cover, List<Track> trackList) {
+    public Playlist(int idPlaylist, String title, String idAccount, String cover, String owner,List<Track> trackList) {
         this.idPlaylist = idPlaylist;
         this.title = title;
         this.idAccount = idAccount;
         this.cover = cover;
+        this.owner = owner;
         this.trackList = trackList;
     }
 
@@ -56,5 +58,13 @@ public class Playlist {
 
     public void setTrackList(List<Track> trackList) {
         this.trackList = trackList;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }
