@@ -4,53 +4,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Playlist {
-    private int id;
-    private String name;
-    private String owner;
-    private String image;
+    private int idPlaylist;
+    private String title;
+    private String idAccount;
+    private String cover;
     public List<Track> trackList;
 
-    public Playlist(int id, String name, String owner, String image, List<Track> trackList) {
-        this.id = id;
-        this.name = name;
-        this.owner = owner;
-        this.image = image;
+    public Playlist(int idPlaylist, String title, String idAccount, String cover, List<Track> trackList) {
+        this.idPlaylist = idPlaylist;
+        this.title = title;
+        this.idAccount = idAccount;
+        this.cover = cover;
         this.trackList = trackList;
     }
 
-    public Track getTrack(int position){
-        return trackList.get(position);
+    public int getIdPlaylist() {
+        return idPlaylist;
     }
 
-    public int getId() {
-        return id;
+    public void setIdPlaylist(int idPlaylist) {
+        this.idPlaylist = idPlaylist;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getTitle() {
+        return title;
     }
 
-    public String getName() {
-        return name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getIdAccount() {
+        return idAccount;
     }
 
-    public String getOwner() {
-        return owner;
+    public void setIdAccount(String idAccount) {
+        this.idAccount = idAccount;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public String getCover() {
+        return cover;
     }
 
-    public String getImage() {
-        return image;
+    public void setCover(String cover) {
+        this.cover = cover;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public List<Track> getTrackList() {
+        return trackList;
+    }
+
+    public void setTrackList(List<Track> trackList) {
+        this.trackList = trackList;
     }
 }

@@ -52,10 +52,11 @@ public class PlaylistLibraryFragment extends Fragment  implements PlaylistAdapte
     }
 
     private void loadPlaylist() {
-        String url = "https://my-json-server.typicode.com/AlanGlezH/mockjson/playlist";
+        System.out.println("Cargando api");
+        String url = "http://10.0.2.2:6000/account/b485f40f-4f2b-43b6-9c6a-604875f31832/playlist";
         Log.i("Creando request", url);
         Map mapHeaders = new HashMap <String, String>(); //agregar headers necesarios
-
+        mapHeaders.put("Content-Type", "application/json; charset=utf-8");
         GsonRequest<Playlist[]> requestPlaylist = new GsonRequest<Playlist[]>(
                 url,
                 Playlist[].class,
@@ -83,6 +84,7 @@ public class PlaylistLibraryFragment extends Fragment  implements PlaylistAdapte
 
         for (int i  = 0; i < playlist.length; i++) {
             listPlaylist.add(playlist[i]);
+            System.out.println(playlist[i].getTitle());
 
         }
         PlaylistAdapter adapter = new PlaylistAdapter(listPlaylist, this,this.getContext());
@@ -110,7 +112,7 @@ public class PlaylistLibraryFragment extends Fragment  implements PlaylistAdapte
 
     @Override
     public void onListItemClick(int clickedItem) {
-        String message = "Playlist clicked: " + listPlaylist.get(clickedItem).getName();
+        String message = "Playlist clicked: " + listPlaylist.get(clickedItem).getTitle();
         Toast.makeText(getContext(),message, Toast.LENGTH_SHORT).show();
     }
 }

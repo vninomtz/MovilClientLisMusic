@@ -44,9 +44,9 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
 
     @Override
     public void onBindViewHolder(@NonNull PlaylistViewHolder holder, int position) {
-        holder.namePlaylist.setText(listPlaylist.get(position).getName());
-        holder.nameOwner.setText((listPlaylist.get(position).getOwner()));
-        Glide.with(context).load(listPlaylist.get(position).getImage()).into(holder.image);
+        holder.namePlaylist.setText(listPlaylist.get(position).getTitle());
+        holder.nameOwner.setText((listPlaylist.get(position).getIdAccount()));
+        Glide.with(context).load(listPlaylist.get(position).getCover()).into(holder.image);
 
 
     }

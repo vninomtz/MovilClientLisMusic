@@ -11,12 +11,14 @@
         android:id="@+id/pagerLibrary"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent" >
+        app:layout_constraintBottom_toTopOf="parent"
+        android:layout_marginBottom="50dp">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layoutLibrary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:tabTextColor="@color/primaryTextColor"/>
     </androidx.viewpager.widget.ViewPager>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
