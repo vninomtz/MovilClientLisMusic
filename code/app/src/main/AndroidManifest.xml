@@ -12,16 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
         <activity android:name=".ui.Account.PopUpTermsAndConditions"
             android:theme="@style/AppTheme.PopupTheme">
         </activity>
-        <activity android:name=".ui.Account.RegisterAccountActivity" />
+        <activity android:name=".ui.Account.RegisterAccountActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".LoginActivity" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
         <activity
             android:name=".HomeActivity"
             android:label="@string/app_name">

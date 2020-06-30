@@ -1,13 +1,13 @@
 package com.uv.lismusicjava.ui.Account;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -22,22 +22,24 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.Gson;
 import com.uv.lismusicjava.HomeActivity;
 import com.uv.lismusicjava.R;
+import com.uv.lismusicjava.domain.Account;
 import com.uv.lismusicjava.jsonmanagement.SingletonRequestQueue;
 
 import org.json.JSONObject;
 
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class RegisterAccountActivity extends AppCompatActivity {
     EditText email, username, password, firstName, lastName, birthdate;
     Button buttonRegister;
     CheckBox checkBoxTermsAndConditions;
+    RadioGroup radioGroupGender;
+    RadioButton radioButtonMale, radioButtonFemale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +51,18 @@ public class RegisterAccountActivity extends AppCompatActivity {
         password = findViewById(R.id.textEditPassword);
         username = findViewById(R.id.textEditUsername);
         birthdate = findViewById(R.id.textDate);
-
+        radioGroupGender = findViewById(R.id.radioGroupGenders);
+        radioButtonMale = findViewById(R.id.radioButtonMale);
+        radioButtonFemale = findViewById(R.id.radioButtonFemale);
         showTermsAndConditions();
 
     }
 
     public void registerAccount(View view) {
-//        if(validateNotEmptyFields()){
-//            Toast.makeText(this, "Register...",Toast.LENGTH_SHORT).show();
-//            jsonParse();
-//        }
-          createAccountPOST();
+        if(validateNotEmptyFields()){
+            createAccountPOST();
+        }
+
     }
 
     public void onRadioButtonClick(View view) {
@@ -98,7 +101,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
     }
 
     private void createAccountPOST() {
-        Map<String,String> paramsAccountMapJoined = getValuesForForm();
+        Map<String,String> paramsAccountMapJoined = putValuesForPost();
         JSONObject paramsAccount = new JSONObject(paramsAccountMapJoined);
         String ip = getString(R.string.ip);
         final String url = "http://" + ip + ":5000/account";
@@ -107,40 +110,56 @@ public class RegisterAccountActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 Log.i("Mensaje de exito", "Respuesta en JSON: " + response);
+                cleanFields();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("Login", "Error Respuesta en JSON: " + error.getMessage());
+                Log.i("Register", "Error Respuesta en JSON: " + error.networkResponse);
             }
         });
         SingletonRequestQueue.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
     }
 
-    private Map<String, String> getValuesForForm() {
-
+    private Map<String, String> putValuesForPost() {
+        Account account = getValuesAccountRegistered();
+        Map<String, String> paramsAccountMap = new HashMap();
+        paramsAccountMap.put("firstName", account.getFirstName());
+        paramsAccountMap.put("lastName", account.getLastName());
+        paramsAccountMap.put("email", account.getEmail());
+        paramsAccountMap.put("password", account.getPassword());
+        paramsAccountMap.put("userName", account.getUsername());
+        paramsAccountMap.put("gender", account.getGender());
+        paramsAccountMap.put("birthday", account.getBirthDate());
+        paramsAccountMap.put("cover", account.getCover());
+        paramsAccountMap.put("typeRegister", account.getSocialMedia());
+        return paramsAccountMap;
+    }
+    private Account getValuesAccountRegistered(){
         String emailJoined = email.getText().toString();
         String firstNameJoined = firstName.getText().toString();
         String lastNameJoined = lastName.getText().toString();
         String passwordJoined = password.getText().toString();
         String userNameJoined = username.getText().toString();
         String birthDateJoined = birthdate.getText().toString();
+        String genderJoined = getGender();
 
-
-        Map<String, String> paramsAccountMap = new HashMap();
-        paramsAccountMap.put("firstName", firstNameJoined);
-        paramsAccountMap.put("lastName", lastNameJoined);
-        paramsAccountMap.put("email", emailJoined);
-        paramsAccountMap.put("password", passwordJoined);
-        paramsAccountMap.put("userName", userNameJoined);
-        paramsAccountMap.put("gender", "Female");
-        paramsAccountMap.put("birthday", birthDateJoined);
-        paramsAccountMap.put("cover", "mifotoperfil.jpg");
-        paramsAccountMap.put("typeRegister", "System");
-
-        return paramsAccountMap;
+        Account account = new Account(firstNameJoined,lastNameJoined,emailJoined,userNameJoined,
+                passwordJoined,genderJoined,null,birthDateJoined, "System");
+        return account;
     }
-
+    private String getGender(){
+        String genderResult;
+        if(radioButtonMale.isChecked()){
+            genderResult = "Male";
+            return genderResult;
+        }
+        if(radioButtonFemale.isChecked()){
+            genderResult = "Female";
+            return genderResult;
+        }
+        return genderResult ="";
+    }
     public boolean validateNotEmptyFields() {
         email = findViewById(R.id.textEditEmail);
         username = findViewById(R.id.textEditUsername);
@@ -148,7 +167,6 @@ public class RegisterAccountActivity extends AppCompatActivity {
         firstName = findViewById(R.id.textEditFirstName);
         lastName = findViewById(R.id.textEditLastName);
         checkBoxTermsAndConditions = findViewById(R.id.checkBoxTermsAndConditions);
-
         String emailJoined = email.getText().toString();
         String usernameJoined = username.getText().toString();
         String passwordJoined = password.getText().toString();
@@ -157,6 +175,10 @@ public class RegisterAccountActivity extends AppCompatActivity {
 
         if (emailJoined.isEmpty()) {
             Toast.makeText(this, "Please enter an email", Toast.LENGTH_SHORT).show();
+        }
+        if(!validateEmail(emailJoined)){
+            email.setError("Invalid email");
+            Toast.makeText(this, "Invalid Email", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (usernameJoined.isEmpty()) {
@@ -180,5 +202,18 @@ public class RegisterAccountActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+    private void cleanFields(){
+        email.setText("");
+        username.setText("");
+        password.setText("");
+        firstName.setText("");
+        lastName.setText("");
+        birthdate.setText("");
+        radioGroupGender.clearCheck();
+    }
+    private boolean validateEmail(String emailForValidate) {
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return pattern.matcher(emailForValidate).matches();
     }
 }

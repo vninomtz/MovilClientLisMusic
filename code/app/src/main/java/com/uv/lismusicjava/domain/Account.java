@@ -11,14 +11,28 @@ public class Account {
     private String password;
     private String gender;
     private String cover;
-    private Date createdDate;
+    private String createdDate;
     private Date updatedDate;
+    private String birthDate;
     private Boolean contentCreator;
-    public SocialMedia socialMedia;
+    private String socialMedia;
+
+    public Account(String firstName, String lastName, String email, String username, String password,
+                   String gender, String cover, String birthDate , String socialMedia) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.gender = gender;
+        this.cover = cover;
+        this.birthDate = birthDate;
+        this.socialMedia = socialMedia;
+    }
 
     public Account(int id, String firstName, String lastName, String email, String username,
-                   String password, String gender, String cover, Date createdDate, Boolean
-                           contentCreator, SocialMedia socialMedia) {
+                   String password, String gender, String cover, String createdDate, Boolean
+                           contentCreator, String socialMedia) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -96,11 +110,11 @@ public class Account {
         this.cover = cover;
     }
 
-    public Date getCreatedDate() {
+    public String getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -120,11 +134,19 @@ public class Account {
         this.contentCreator = contentCreator;
     }
 
-    public SocialMedia getSocialMedia() {
+    public String getSocialMedia() {
         return socialMedia;
     }
 
-    public void setSocialMedia(SocialMedia socialMedia) {
+    public void setSocialMedia(String socialMedia) {
         this.socialMedia = socialMedia;
     }
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
 }
