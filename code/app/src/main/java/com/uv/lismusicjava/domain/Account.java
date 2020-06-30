@@ -16,6 +16,10 @@ public class Account {
     private String birthDate;
     private Boolean contentCreator;
     private String socialMedia;
+    private String accesToken;
+
+
+
 
     public Account(String firstName, String lastName, String email, String username, String password,
                    String gender, String cover, String birthDate , String socialMedia) {
@@ -149,4 +153,11 @@ public class Account {
         this.birthDate = birthDate;
     }
 
+    public String getAccesToken() {
+        return accesToken;
+    }
+
+    public void setAccesToken(String accesToken) {
+        this.accesToken = accesToken;
+    }
 }

@@ -8,6 +8,7 @@ import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.uv.lismusicjava.utils.SingletonAccount;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -22,7 +23,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        if(AccessToken.getCurrentAccessToken() == null){
+        if(AccessToken.getCurrentAccessToken() == null && SingletonAccount.getSingletonAccount() == null ){
             goLoginScreen();
         }else{
             BottomNavigationView navView = findViewById(R.id.nav_view);
