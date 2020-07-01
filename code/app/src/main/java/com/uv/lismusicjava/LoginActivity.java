@@ -9,10 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -27,14 +24,11 @@ import com.uv.lismusicjava.domain.Account;
 import com.uv.lismusicjava.jsonmanagement.SingletonRequestQueue;
 import com.uv.lismusicjava.ui.Account.RegisterAccountActivity;
 import com.uv.lismusicjava.utils.SingletonAccount;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
-
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -137,8 +131,7 @@ public class LoginActivity extends AppCompatActivity {
     private void createLoginRequest() {
         Map<String,String> requestParams = getValuesForLoginRequest();
         JSONObject paramsAccount = new JSONObject(requestParams);
-        String ip = getString(R.string.ip);
-        final String url = "http://" + ip + ":5000/login";
+        final String url = "http://" + getString(R.string.ip) + ":5000/login";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, paramsAccount, handleResponseSuccess(),handleResponseError());
         SingletonRequestQueue.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
     }
@@ -159,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                     Account account = gson.fromJson(response.getJSONObject("account").toString(), Account.class);
                     account.setAccesToken(response.getString("access_token"));
                     SingletonAccount.setSingletonAccount(account);
-                    Toast.makeText(LoginActivity.this, "Welcome: " + SingletonAccount.getSingletonAccount().getFirstName(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Welcome: " + SingletonAccount.getSingletonAccount().getIdAccount(), Toast.LENGTH_SHORT).show();
                     goHomeScreen();
 
                 } catch (JSONException e) {

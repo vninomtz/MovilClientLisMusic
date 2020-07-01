@@ -1,34 +1,25 @@
 package com.uv.lismusicjava.ui.library;
-
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
-
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.uv.lismusicjava.R;
 import com.uv.lismusicjava.domain.Playlist;
 import com.uv.lismusicjava.jsonmanagement.GsonRequest;
 import com.uv.lismusicjava.jsonmanagement.SingletonRequestQueue;
-import com.uv.lismusicjava.models.Track;
 import com.uv.lismusicjava.ui.library.adapters.PlaylistAdapter;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class PlaylistLibraryFragment extends Fragment  implements PlaylistAdapter.ListItemClick{
@@ -53,7 +44,7 @@ public class PlaylistLibraryFragment extends Fragment  implements PlaylistAdapte
 
     private void loadPlaylist() {
         System.out.println("Cargando api");
-        String url = "http://10.0.2.2:6000/account/b485f40f-4f2b-43b6-9c6a-604875f31832/playlist";
+        String url = "http://"+ getString(R.string.ip) +":6000/account/b485f40f-4f2b-43b6-9c6a-604875f31832/playlist";
         Log.i("Creando request", url);
         Map mapHeaders = new HashMap <String, String>(); //agregar headers necesarios
         mapHeaders.put("Content-Type", "application/json; charset=utf-8");
@@ -104,9 +95,6 @@ public class PlaylistLibraryFragment extends Fragment  implements PlaylistAdapte
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-
-
 
     }
 

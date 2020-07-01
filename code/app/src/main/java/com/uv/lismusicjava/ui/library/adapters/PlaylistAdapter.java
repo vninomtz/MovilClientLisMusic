@@ -28,7 +28,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
         this.listPlaylist = listPlaylist;
         this.onclickListener = listItemClick;
         this.context = context;
-
     }
 
     public  interface  ListItemClick{
@@ -47,8 +46,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
         holder.namePlaylist.setText(listPlaylist.get(position).getTitle());
         holder.nameOwner.setText((listPlaylist.get(position).getOwner()));
         Glide.with(context).load(listPlaylist.get(position).getCover()).into(holder.image);
-
-
     }
 
     @Override
@@ -71,7 +68,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
         @Override
         public void onClick(View v) {
             int clickedItem = getAdapterPosition();
-
             onclickListener.onListItemClick((clickedItem));
         }
     }
