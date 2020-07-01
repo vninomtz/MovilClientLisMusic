@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.media.UnsupportedSchemeException;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -18,18 +19,23 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 import com.uv.lismusicjava.HomeActivity;
+import com.uv.lismusicjava.LoginActivity;
 import com.uv.lismusicjava.R;
 import com.uv.lismusicjava.domain.Account;
 import com.uv.lismusicjava.jsonmanagement.SingletonRequestQueue;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -104,6 +110,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
         Map<String,String> paramsAccountMapJoined = putValuesForPost();
         JSONObject paramsAccount = new JSONObject(paramsAccountMapJoined);
         String ip = getString(R.string.ip);
+        final Gson gson = new Gson();
         final String url = "http://" + ip + ":5000/account";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, paramsAccount, new Response.Listener<JSONObject>() {
@@ -111,11 +118,24 @@ public class RegisterAccountActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 Log.i("Mensaje de exito", "Respuesta en JSON: " + response);
                 cleanFields();
+                goLoginScreen();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.i("Register", "Error Respuesta en JSON: " + error.networkResponse);
+                String body;
+               // String statusCode = String.valueOf(error.networkResponse.statusCode);
+                if(error.networkResponse.data!=null){
+                    try {
+                        body = new String(error.networkResponse.data, StandardCharsets.UTF_8);
+                        JSONObject jsonObjectError = new JSONObject(body);
+                        String jsonErrorString = jsonObjectError.getString("error");
+                        Log.i("Register", "Error in JSON: " + body);
+                        Toast.makeText(getApplicationContext(),jsonErrorString,Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
         SingletonRequestQueue.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
@@ -215,5 +235,10 @@ public class RegisterAccountActivity extends AppCompatActivity {
     private boolean validateEmail(String emailForValidate) {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
         return pattern.matcher(emailForValidate).matches();
+    }
+    private void goLoginScreen() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
