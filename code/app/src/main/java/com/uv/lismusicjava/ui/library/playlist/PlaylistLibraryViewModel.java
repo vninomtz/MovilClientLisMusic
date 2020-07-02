@@ -1,4 +1,4 @@
-package com.uv.lismusicjava.ui.library;
+package com.uv.lismusicjava.ui.library.playlist;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_playlistLibraryFragment"
-        android:name="com.uv.lismusicjava.ui.library.PlaylistLibraryFragment"
+        android:name="com.uv.lismusicjava.ui.library.playlist.PlaylistLibraryFragment"
         android:label="fragment_playlist_library"
         tools:layout="@layout/fragment_playlist_library" />
     <fragment

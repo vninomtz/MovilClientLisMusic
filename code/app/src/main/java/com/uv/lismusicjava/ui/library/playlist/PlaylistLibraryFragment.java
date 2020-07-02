@@ -1,4 +1,4 @@
-package com.uv.lismusicjava.ui.library;
+package com.uv.lismusicjava.ui.library.playlist;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -7,24 +7,19 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
+
 import com.uv.lismusicjava.R;
-import com.uv.lismusicjava.jsonmanagement.GsonRequest;
-import com.uv.lismusicjava.jsonmanagement.SingletonRequestQueue;
 import com.uv.lismusicjava.playlist.Playlist;
 import com.uv.lismusicjava.ui.library.adapters.PlaylistAdapter;
-import com.uv.lismusicjava.utils.SingletonAccount;
+import com.uv.lismusicjava.ui.library.playlist.PlaylistLibraryViewModel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PlaylistLibraryFragment extends Fragment  implements PlaylistAdapter.ListItemClick{
 

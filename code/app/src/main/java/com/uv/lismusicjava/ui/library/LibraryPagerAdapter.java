@@ -1,16 +1,11 @@
 package com.uv.lismusicjava.ui.library;
 
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.uv.lismusicjava.R;
+import com.uv.lismusicjava.ui.library.playlist.PlaylistLibraryFragment;
 
 public class LibraryPagerAdapter extends FragmentStatePagerAdapter {
 
