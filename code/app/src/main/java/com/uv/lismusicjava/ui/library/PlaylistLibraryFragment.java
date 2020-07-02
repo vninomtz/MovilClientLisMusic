@@ -18,6 +18,8 @@ import com.uv.lismusicjava.domain.Playlist;
 import com.uv.lismusicjava.jsonmanagement.GsonRequest;
 import com.uv.lismusicjava.jsonmanagement.SingletonRequestQueue;
 import com.uv.lismusicjava.ui.library.adapters.PlaylistAdapter;
+import com.uv.lismusicjava.utils.SingletonAccount;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,8 +46,13 @@ public class PlaylistLibraryFragment extends Fragment  implements PlaylistAdapte
 
     private void loadPlaylist() {
         System.out.println("Cargando api");
-        String url = "http://"+ getString(R.string.ip) +":6000/account/b485f40f-4f2b-43b6-9c6a-604875f31832/playlist";
+        String ip = getString(R.string.ip);
+        String idAccount = SingletonAccount.getSingletonAccount().getIdAccount();
+        String url = "http://"+ip+":6000/account/"+idAccount+"/playlist";
         Log.i("Creando request", url);
+
+        String token = SingletonAccount.getSingletonAccount().getAccesToken();
+        Log.i("Token", token);
         Map mapHeaders = new HashMap <String, String>(); //agregar headers necesarios
         mapHeaders.put("Content-Type", "application/json; charset=utf-8");
         GsonRequest<Playlist[]> requestPlaylist = new GsonRequest<Playlist[]>(
@@ -87,7 +94,6 @@ public class PlaylistLibraryFragment extends Fragment  implements PlaylistAdapte
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.i("Error", error.toString());
-
             }
 
         };

@@ -110,7 +110,6 @@ public class RegisterAccountActivity extends AppCompatActivity {
         Map<String,String> paramsAccountMapJoined = putValuesForPost();
         JSONObject paramsAccount = new JSONObject(paramsAccountMapJoined);
         String ip = getString(R.string.ip);
-        final Gson gson = new Gson();
         final String url = "http://" + ip + ":5000/account";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, paramsAccount, new Response.Listener<JSONObject>() {

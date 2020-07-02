@@ -3,6 +3,7 @@ package com.uv.lismusicjava;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -170,7 +171,7 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     body = new String(error.networkResponse.data, "UTF-8");
                     JSONObject errorObject = new JSONObject(body);
-
+                    Log.i("Eror",body);
                     Toast.makeText(LoginActivity.this, errorObject.get("error").toString(), Toast.LENGTH_SHORT).show();
                 } catch (UnsupportedEncodingException | JSONException e) {
                     e.printStackTrace();
