@@ -6,9 +6,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ReaderService {
-    private static String IP = Integer.toString(R.string.ip);
+    private static String IP = "10.0.2.2";
     private static Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://" + "10.0.2.2" +":6000/")
+            .baseUrl("http://" + IP +":6000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
