@@ -3,7 +3,7 @@ package com.uv.lismusicjava.domain;
 import java.util.Date;
 
 public class Account {
-    private  int id;
+    private  String idAccount;
     private String firstName;
     private String lastName;
     private String email;
@@ -34,10 +34,10 @@ public class Account {
         this.socialMedia = socialMedia;
     }
 
-    public Account(int id, String firstName, String lastName, String email, String username,
+    public Account(String id, String firstName, String lastName, String email, String username,
                    String password, String gender, String cover, String createdDate, Boolean
                            contentCreator, String socialMedia) {
-        this.id = id;
+        this.idAccount = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -50,12 +50,12 @@ public class Account {
         this.socialMedia = socialMedia;
     }
 
-    public int getId() {
-        return id;
+    public String getIdAccount() {
+        return idAccount;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdAccount(int String) {
+        this.idAccount = idAccount;
     }
 
     public String getFirstName() {
