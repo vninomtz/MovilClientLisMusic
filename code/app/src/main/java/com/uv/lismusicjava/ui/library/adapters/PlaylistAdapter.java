@@ -1,7 +1,6 @@
 package com.uv.lismusicjava.ui.library.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.uv.lismusicjava.R;
-import com.uv.lismusicjava.domain.Playlist;
-import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.module.AppGlideModule;
+import com.uv.lismusicjava.playlist.Playlist;
 
 import java.util.ArrayList;
 
