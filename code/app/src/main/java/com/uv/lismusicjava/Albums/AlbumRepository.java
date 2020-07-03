@@ -31,7 +31,6 @@ public class AlbumRepository {
             public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
                 if(response.isSuccessful()){
                     albumData.setValue(response.body());
-                    System.out.println(response.body());
                 }
             }
 

@@ -19,13 +19,15 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
-        android:layout_width="412dp"
-        android:layout_height="731dp"
+        android:layout_width="415dp"
+        android:layout_height="569dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.441">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -159,11 +161,11 @@
                 android:id="@+id/textViewEmail"
                 android:layout_width="81dp"
                 android:layout_height="19dp"
-                android:layout_marginTop="116dp"
+                android:layout_marginTop="16dp"
                 android:text="Email"
                 android:textColor="@color/primaryTextColor"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.203"
+                app:layout_constraintHorizontal_bias="0.173"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -246,22 +248,6 @@
 
             </RadioGroup>
 
-            <Button
-                android:id="@+id/buttonRegisterAccount"
-                android:layout_width="240dp"
-                android:layout_height="38dp"
-                android:layout_marginTop="44dp"
-                android:background="@drawable/button_login"
-                android:onClick="registerAccount"
-                android:text="REGISTER"
-                android:textColor="@color/primaryTextColor"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.563"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroupGenders"
-                app:layout_constraintVertical_bias="1.0" />
-
             <TextView
                 android:id="@+id/textViewTermsAndConditions"
                 android:layout_width="wrap_content"
@@ -288,5 +274,19 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/buttonRegisterAccount"
+        android:layout_width="240dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_login"
+        android:onClick="registerAccount"
+        android:text="REGISTER"
+        android:textColor="@color/primaryTextColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
