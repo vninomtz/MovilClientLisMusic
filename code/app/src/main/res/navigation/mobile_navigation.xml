@@ -58,5 +58,10 @@
         android:id="@+id/trackFragment"
         android:name="com.uv.lismusicjava.ui.track.TrackFragment"
         android:label="track_fragment"
-        tools:layout="@layout/track_fragment" />
+        tools:layout="@layout/track_fragment" >
+        <argument
+            android:name="playlist"
+            app:argType="com.uv.lismusicjava.playlist.Playlist"
+            app:nullable="true" />
+    </fragment>
 </navigation>

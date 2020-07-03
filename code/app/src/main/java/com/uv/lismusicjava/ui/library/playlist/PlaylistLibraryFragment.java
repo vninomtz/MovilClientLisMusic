@@ -1,5 +1,7 @@
 package com.uv.lismusicjava.ui.library.playlist;
+
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -18,12 +20,13 @@ import android.widget.Toast;
 
 import com.uv.lismusicjava.R;
 import com.uv.lismusicjava.playlist.Playlist;
+import com.uv.lismusicjava.ui.library.LibraryFragmentDirections;
 import com.uv.lismusicjava.ui.library.adapters.PlaylistAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlaylistLibraryFragment extends Fragment  implements PlaylistAdapter.ListItemClick{
+public class PlaylistLibraryFragment extends Fragment implements PlaylistAdapter.ListItemClick {
 
     RecyclerView recyclerPlaylist;
     ArrayList<Playlist> listPlaylist = new ArrayList<>();
@@ -43,36 +46,35 @@ public class PlaylistLibraryFragment extends Fragment  implements PlaylistAdapte
             if(playlists != null){
                 listPlaylist.clear();
                 listPlaylist.addAll(playlists);
-                setupRecyclerView();
+                playlistAdapter.notifyDataSetChanged();
             }
-        });
 
+
+        });
+        setupRecyclerView();
         return viewFragment;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)  {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void setupRecyclerView(){
-        if(playlistAdapter == null){
+    private void setupRecyclerView() {
+        if (playlistAdapter == null) {
             playlistAdapter = new PlaylistAdapter(listPlaylist, this, this.getContext());
             recyclerPlaylist.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerPlaylist.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
             recyclerPlaylist.setAdapter(playlistAdapter);
-        }else{
+        } else {
             playlistAdapter.notifyDataSetChanged();
         }
-    }
-    public void goToTracks(){
-        NavHostFragment.findNavController(this).navigate(R.id.action_navigation_playlistLibraryFragment_to_trackFragment);
     }
 
     @Override
     public void onListItemClick(int clickedItem, View itemView) {
-        //goToTracks();
-        Toast.makeText(getContext(),"Playlist", Toast.LENGTH_SHORT).show();
-       NavHostFragment.findNavController(this).navigate(R.id.action_navigation_library_to_trackFragment);
+        Playlist playlist = listPlaylist.get(clickedItem);
+        LibraryFragmentDirections.ActionNavigationLibraryToTrackFragment action = LibraryFragmentDirections.actionNavigationLibraryToTrackFragment(playlist);
+        NavHostFragment.findNavController(this).navigate(action);
     }
 }

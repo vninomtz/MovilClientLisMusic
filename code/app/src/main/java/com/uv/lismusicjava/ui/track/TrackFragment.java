@@ -14,9 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.uv.lismusicjava.R;
+import com.uv.lismusicjava.playlist.Playlist;
 import com.uv.lismusicjava.track.Track;
 import com.uv.lismusicjava.ui.track.adapter.TrackAdapter;
 
@@ -28,6 +32,8 @@ public class TrackFragment extends Fragment implements TrackAdapter.OnItemClickL
     private ArrayList<Track> listTracks;
     private RecyclerView recyclerTracks;
     private TrackAdapter trackAdapter;
+    private ImageView cover;
+    private TextView title, artist;
 
 
     @Override
@@ -35,6 +41,9 @@ public class TrackFragment extends Fragment implements TrackAdapter.OnItemClickL
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.track_fragment, container, false);
         recyclerTracks = view.findViewById(R.id.recyclerView_tracks);
+        cover = view.findViewById(R.id.image_fragment_tracks);
+        title = view.findViewById(R.id.textView_Title);
+        artist = view.findViewById((R.id.textView_subtitle));
         return view;
     }
 
@@ -42,18 +51,15 @@ public class TrackFragment extends Fragment implements TrackAdapter.OnItemClickL
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(TrackViewModel.class);
-        listTracks = new ArrayList<>();
-        listTracks.add(new Track("12345","Canción1ffffffffffffffffffffffffffffffffffffffffffffffff",122,"file",true,"sincover","Artista"));
-        listTracks.add(new Track("12345","Canción2",122,"file",true,"sincover","Artista"));
-        listTracks.add(new Track("12345","Canción3",122,"file",true,"sincover","Artista"));
-        listTracks.add(new Track("12345","Canción4",122,"file",true,"sincover","Artista"));
-        listTracks.add(new Track("12345","Canción5",122,"file",true,"sincover","Artista"));
-        listTracks.add(new Track("12345","Canción1",122,"file",true,"sincover","Artista"));
-        listTracks.add(new Track("12345","Canción2",122,"file",true,"sincover","Artista"));
-        listTracks.add(new Track("12345","Canción3",122,"file",true,"sincover","Artista"));
-        listTracks.add(new Track("12345","Canción4",122,"file",true,"sincover","Artista"));
-        listTracks.add(new Track("12345","Canción5",122,"file",true,"sincover","Artista"));
-        setupRecyclerView();
+        TrackFragmentArgs args = TrackFragmentArgs.fromBundle(getArguments());
+        Playlist playlist = args.getPlaylist();
+        if(playlist != null){
+            title.setText(playlist.getTitle());
+            artist.setText(playlist.getOwner());
+            Glide.with(this).load(playlist.getCover()).into(cover);
+        }
+
+        //setupRecyclerView();
     }
 
     private void setupRecyclerView(){
