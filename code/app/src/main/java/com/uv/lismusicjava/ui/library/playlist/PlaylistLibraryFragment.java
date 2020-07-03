@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavHostController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +19,6 @@ import android.widget.Toast;
 import com.uv.lismusicjava.R;
 import com.uv.lismusicjava.playlist.Playlist;
 import com.uv.lismusicjava.ui.library.adapters.PlaylistAdapter;
-import com.uv.lismusicjava.ui.library.playlist.PlaylistLibraryViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +50,11 @@ public class PlaylistLibraryFragment extends Fragment  implements PlaylistAdapte
         return viewFragment;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)  {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
     private void setupRecyclerView(){
         if(playlistAdapter == null){
             playlistAdapter = new PlaylistAdapter(listPlaylist, this, this.getContext());
@@ -58,11 +65,14 @@ public class PlaylistLibraryFragment extends Fragment  implements PlaylistAdapte
             playlistAdapter.notifyDataSetChanged();
         }
     }
-
+    public void goToTracks(){
+        NavHostFragment.findNavController(this).navigate(R.id.action_navigation_playlistLibraryFragment_to_trackFragment);
+    }
 
     @Override
-    public void onListItemClick(int clickedItem) {
-        String message = "Playlist clicked: " + listPlaylist.get(clickedItem).getTitle();
-        Toast.makeText(getContext(),message, Toast.LENGTH_SHORT).show();
+    public void onListItemClick(int clickedItem, View itemView) {
+        //goToTracks();
+        Toast.makeText(getContext(),"Playlist", Toast.LENGTH_SHORT).show();
+       NavHostFragment.findNavController(this).navigate(R.id.action_navigation_library_to_trackFragment);
     }
 }

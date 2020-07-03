@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.uv.lismusicjava.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_trackFragment"
+            app:destination="@id/trackFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_search"
@@ -31,6 +35,9 @@
         <action
             android:id="@+id/action_navigation_library_to_albumLibraryFragment"
             app:destination="@id/navigation_albumLibraryFragment" />
+        <action
+            android:id="@+id/action_navigation_library_to_trackFragment"
+            app:destination="@id/trackFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_playlistLibraryFragment"
@@ -47,4 +54,9 @@
         android:name="com.uv.lismusicjava.ui.library.AlbumLibraryFragment"
         android:label="fragment_album_library"
         tools:layout="@layout/fragment_album_library" />
+    <fragment
+        android:id="@+id/trackFragment"
+        android:name="com.uv.lismusicjava.ui.track.TrackFragment"
+        android:label="track_fragment"
+        tools:layout="@layout/track_fragment" />
 </navigation>

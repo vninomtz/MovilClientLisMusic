@@ -28,7 +28,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
     }
 
     public  interface  ListItemClick{
-        void onListItemClick(int clickedItem);
+        void onListItemClick(int clickedItem, View itemView);
     }
 
     @NonNull
@@ -50,7 +50,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
         return listPlaylist.size();
     }
 
-    public class PlaylistViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class PlaylistViewHolder extends RecyclerView.ViewHolder {
         TextView namePlaylist, nameOwner;
         ImageView image;
 
@@ -59,13 +59,13 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
             namePlaylist = (TextView) itemView.findViewById(R.id.textView_namePlaylist_playlist_item);
             nameOwner = (TextView) itemView.findViewById(R.id.textView_nameOwner_playlist_item);
             image = (ImageView)  itemView.findViewById(R.id.imageView_playlist_item);
-            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    onclickListener.onListItemClick(position, itemView);
+                }
+            });
         }
 
-        @Override
-        public void onClick(View v) {
-            int clickedItem = getAdapterPosition();
-            onclickListener.onListItemClick((clickedItem));
-        }
     }
 }
