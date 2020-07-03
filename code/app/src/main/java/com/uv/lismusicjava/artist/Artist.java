@@ -1,10 +1,17 @@
-package com.uv.lismusicjava.domain;
+package com.uv.lismusicjava.artist;
+
+import com.google.gson.annotations.SerializedName;
 
 public class Artist {
+    @SerializedName("idArtist")
     private String idArtist;
+    @SerializedName("name")
     private String name;
+    @SerializedName("cover")
     private String cover;
+    @SerializedName("registerDate")
     private String registerDate;
+    @SerializedName("description")
     private String description;
 
     public Artist(String idArtist, String name, String cover, String registerDate, String description) {

@@ -1,13 +1,23 @@
-package com.uv.lismusicjava.domain;
+package com.uv.lismusicjava.Albums;
+
+import com.google.gson.annotations.SerializedName;
 
 public class Album {
+    @SerializedName("idAlbum")
     private String idAlbum;
+    @SerializedName("title")
     private String title;
+    @SerializedName("cover")
     private String cover;
+    @SerializedName("publication")
     private String publication;
+    @SerializedName("recordCompany")
     private String recordCompany;
+    @SerializedName("idMusicGender")
     private int idMusicGender;
+    @SerializedName("idAlbumType")
     private int idAlbumType;
+    @SerializedName("idArtist")
     private String idArtist;
 
     public Album(String idAlbum, String title, String cover, String publication, String recordCompany,
