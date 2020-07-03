@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.uv.lismusicjava.ui.library.Album.AlbumLibraryFragment;
+import com.uv.lismusicjava.ui.library.artist.ArtistLibraryFragment;
 import com.uv.lismusicjava.ui.library.playlist.PlaylistLibraryFragment;
 
 public class LibraryPagerAdapter extends FragmentStatePagerAdapter {

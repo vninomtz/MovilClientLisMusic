@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.uv.lismusicjava.R;
-import com.uv.lismusicjava.domain.Artist;
+import com.uv.lismusicjava.artist.Artist;
+
 
 import java.util.ArrayList;
 
