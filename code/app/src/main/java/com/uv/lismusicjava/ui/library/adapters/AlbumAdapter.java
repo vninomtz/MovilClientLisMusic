@@ -11,8 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.uv.lismusicjava.Albums.Album;
 import com.uv.lismusicjava.R;
-import com.uv.lismusicjava.domain.Album;
+
 
 import java.util.ArrayList;
 

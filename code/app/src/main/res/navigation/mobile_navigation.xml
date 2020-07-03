@@ -44,7 +44,7 @@
         tools:layout="@layout/fragment_artist_library" />
     <fragment
         android:id="@+id/navigation_albumLibraryFragment"
-        android:name="com.uv.lismusicjava.ui.library.AlbumLibraryFragment"
+        android:name="com.uv.lismusicjava.ui.library.Album.AlbumLibraryFragment"
         android:label="fragment_album_library"
         tools:layout="@layout/fragment_album_library" />
 </navigation>
