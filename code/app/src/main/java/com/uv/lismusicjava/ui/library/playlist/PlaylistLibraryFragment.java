@@ -38,7 +38,12 @@ public class PlaylistLibraryFragment extends Fragment implements PlaylistAdapter
                              @Nullable Bundle savedInstanceState) {
         View viewFragment = inflater.inflate(R.layout.fragment_playlist_library, container, false);
         recyclerPlaylist = viewFragment.findViewById(R.id.recyclerView_playlist_library);
+        return viewFragment;
+    }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         playlistViewModel = ViewModelProviders.of(this).get(PlaylistLibraryViewModel.class);
         playlistViewModel.init();
         playlistViewModel.getPlaylistRepository().observe(getViewLifecycleOwner(), playlistResponse -> {
@@ -46,18 +51,9 @@ public class PlaylistLibraryFragment extends Fragment implements PlaylistAdapter
             if(playlists != null){
                 listPlaylist.clear();
                 listPlaylist.addAll(playlists);
-                playlistAdapter.notifyDataSetChanged();
+                setupRecyclerView();
             }
-
-
         });
-        setupRecyclerView();
-        return viewFragment;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
     }
 
     private void setupRecyclerView() {

@@ -1,12 +1,21 @@
 package com.uv.lismusicjava.track;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Track {
+    @SerializedName("idTrack")
     private String idTrack;
+    @SerializedName("title")
     private String title;
+    @SerializedName("duration")
     private float duration;
+    @SerializedName("fileTrack")
     private String fileTrack;
+    @SerializedName("avaible")
     private boolean avaible;
+    @SerializedName("cover")
     private String cover;
+    @SerializedName("artist_name")
     private String artistName;
 
     public Track(String idTrack, String title, float duration, String fileTrack, boolean avaible, String cover, String artistName) {

@@ -19,23 +19,11 @@ import com.google.android.material.tabs.TabLayout;
 import com.uv.lismusicjava.R;
 
 public class LibraryFragment extends Fragment {
-
-    private LibraryViewModel libraryViewModel;
     LibraryPagerAdapter libraryPagerAdapter;
     private ViewPager viewPager;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        /*libraryViewModel =
-                ViewModelProviders.of(this).get(LibraryViewModel.class);*/
-
-        //final TextView textView = root.findViewById(R.id.text_notifications);
-        /*libraryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
         View root = inflater.inflate(R.layout.fragment_library, container, false);
         return root;
     }
