@@ -1,4 +1,4 @@
-package com.uv.lismusicjava;
+package com.uv.lismusicjava.ui.login;
 
 import android.content.Intent;
 import android.graphics.Paint;
@@ -17,6 +17,8 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.uv.lismusicjava.Account.AccountRepository;
+import com.uv.lismusicjava.HomeActivity;
+import com.uv.lismusicjava.R;
 import com.uv.lismusicjava.ui.Account.RegisterAccountActivity;
 import com.uv.lismusicjava.utils.SingletonAccount;
 

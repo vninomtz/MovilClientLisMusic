@@ -1,4 +1,4 @@
-package com.uv.lismusicjava;
+package com.uv.lismusicjava.ui.login;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

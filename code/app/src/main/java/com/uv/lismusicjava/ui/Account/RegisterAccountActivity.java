@@ -1,18 +1,14 @@
 package com.uv.lismusicjava.ui.Account;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.media.UnsupportedSchemeException;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -24,10 +20,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.uv.lismusicjava.Account.AccountApi;
-import com.uv.lismusicjava.Account.AccountRepository;
 import com.uv.lismusicjava.HomeActivity;
-import com.uv.lismusicjava.LoginActivity;
+import com.uv.lismusicjava.ui.login.LoginActivity;
 import com.uv.lismusicjava.R;
 import com.uv.lismusicjava.domain.Account;
 import com.uv.lismusicjava.jsonmanagement.SingletonRequestQueue;
@@ -37,9 +31,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
-
-
-import retrofit2.Call;
 
 public class RegisterAccountActivity extends AppCompatActivity {
     EditText email, username, password, firstName, lastName, birthdate;

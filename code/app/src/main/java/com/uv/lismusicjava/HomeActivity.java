@@ -4,13 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
-import com.facebook.login.widget.LoginButton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.uv.lismusicjava.ui.login.LoginActivity;
 import com.uv.lismusicjava.utils.SingletonAccount;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
