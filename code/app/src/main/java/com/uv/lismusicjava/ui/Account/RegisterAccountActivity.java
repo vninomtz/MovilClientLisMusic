@@ -1,6 +1,8 @@
 package com.uv.lismusicjava.ui.Account;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -18,39 +20,45 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.gson.Gson;
+import com.uv.lismusicjava.Account.AccountApi;
+import com.uv.lismusicjava.Account.AccountRepository;
 import com.uv.lismusicjava.HomeActivity;
 import com.uv.lismusicjava.LoginActivity;
 import com.uv.lismusicjava.R;
 import com.uv.lismusicjava.domain.Account;
 import com.uv.lismusicjava.jsonmanagement.SingletonRequestQueue;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+
+import retrofit2.Call;
+
 public class RegisterAccountActivity extends AppCompatActivity {
     EditText email, username, password, firstName, lastName, birthdate;
-    Button buttonRegister;
     CheckBox checkBoxTermsAndConditions;
     RadioGroup radioGroupGender;
     RadioButton radioButtonMale, radioButtonFemale;
+    AccountViewModel accountViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_account);
+        configElementsActivity();
+        showTermsAndConditions();
+
+    }
+
+
+    private void configElementsActivity(){
         email = findViewById(R.id.textEditEmail);
         firstName = findViewById(R.id.textEditFirstName);
         lastName = findViewById(R.id.textEditLastName);
@@ -60,15 +68,10 @@ public class RegisterAccountActivity extends AppCompatActivity {
         radioGroupGender = findViewById(R.id.radioGroupGenders);
         radioButtonMale = findViewById(R.id.radioButtonMale);
         radioButtonFemale = findViewById(R.id.radioButtonFemale);
-        showTermsAndConditions();
-
     }
 
     public void registerAccount(View view) {
-        if(validateNotEmptyFields()){
-            createAccountPOST();
-        }
-
+        validateNotEmptyFields();
     }
 
     public void onRadioButtonClick(View view) {
@@ -166,6 +169,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
         Account account = new Account(firstNameJoined,lastNameJoined,emailJoined,userNameJoined,
                 passwordJoined,genderJoined,null,birthDateJoined, "System");
         return account;
+
     }
     private String getGender(){
         String genderResult;
