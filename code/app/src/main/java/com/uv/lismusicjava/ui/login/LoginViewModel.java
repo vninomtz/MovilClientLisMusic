@@ -9,8 +9,6 @@ import com.uv.lismusicjava.pojo.LoginRequest;
 import com.uv.lismusicjava.pojo.LoginResponse;
 
 public class LoginViewModel extends ViewModel {
-    //private String user;
-    //private String password;
     private MutableLiveData<LoginResponse> loginObserver = new MutableLiveData<>();
     private MutableLiveData<String> loginError = new MutableLiveData<>();
     private MutableLiveData<String> toastMessageObserver = new MutableLiveData<>();
