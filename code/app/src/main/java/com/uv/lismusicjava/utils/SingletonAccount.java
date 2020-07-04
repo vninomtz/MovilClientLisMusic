@@ -1,6 +1,6 @@
 package com.uv.lismusicjava.utils;
 
-import com.uv.lismusicjava.domain.Account;
+import com.uv.lismusicjava.pojo.Account;
 
 public class SingletonAccount {
     private static Account singletonAccount;
