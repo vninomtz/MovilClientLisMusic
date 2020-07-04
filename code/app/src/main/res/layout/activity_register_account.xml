@@ -279,14 +279,14 @@
         android:id="@+id/buttonRegisterAccount"
         android:layout_width="240dp"
         android:layout_height="38dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/button_login"
         android:onClick="registerAccount"
         android:text="REGISTER"
         android:textColor="@color/primaryTextColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

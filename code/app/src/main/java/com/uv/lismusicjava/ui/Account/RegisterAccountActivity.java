@@ -71,8 +71,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
     }
 
     public void registerAccount(View view) {
-
-
+        validateNotEmptyFields();
     }
 
     public void onRadioButtonClick(View view) {
@@ -187,7 +186,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
     public boolean validateNotEmptyFields() {
         email = findViewById(R.id.textEditEmail);
         username = findViewById(R.id.textEditUsername);
-        //password = findViewById(R.id.textEditPassword);
+        password = findViewById(R.id.textEditPassword);
         firstName = findViewById(R.id.textEditFirstName);
         lastName = findViewById(R.id.textEditLastName);
         checkBoxTermsAndConditions = findViewById(R.id.checkBoxTermsAndConditions);
