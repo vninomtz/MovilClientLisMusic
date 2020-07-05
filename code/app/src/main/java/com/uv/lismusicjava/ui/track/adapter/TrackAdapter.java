@@ -43,7 +43,7 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.TrackViewHol
     public void onBindViewHolder(@NonNull TrackViewHolder holder, int position) {
         holder.title.setText(listTracks.get(position).getTitle());
         holder.artist.setText((listTracks.get(position).getArtistName()));
-        //Glide.with(context).load(listTracks.get(position).getCover()).into(holder.cover);
+        Glide.with(context).load(listTracks.get(position).getCover()).into(holder.cover);
     }
 
     @Override

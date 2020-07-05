@@ -3,12 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.library.playlist.PlaylistLibraryFragment">
+    tools:context=".ui.library.playlist.PlaylistLibraryFragment"
+    android:background="@color/primaryColor">
 
+    <RelativeLayout
+        android:id="@+id/container_add_playlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/btn_add_playlist"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_add_box_24"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/btn_add_playlist"
+            android:text="Add Playlist"
+            android:layout_centerInParent="true"
+            android:textSize="25sp"
+            android:textColor="@color/primaryTextColor"/>
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_playlist_library"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/container_add_playlist"/>
 
 </RelativeLayout>

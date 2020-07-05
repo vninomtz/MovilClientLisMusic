@@ -9,12 +9,10 @@ import androidx.lifecycle.ViewModelProviders;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.media.UnsupportedSchemeException;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -28,7 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.uv.lismusicjava.Account.Account;
 import com.uv.lismusicjava.HomeActivity;
-import com.uv.lismusicjava.LoginActivity;
+import com.uv.lismusicjava.ui.login.LoginActivity;
 import com.uv.lismusicjava.R;
 import com.uv.lismusicjava.jsonmanagement.SingletonRequestQueue;
 import org.json.JSONException;
@@ -37,9 +35,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
-
-
-import retrofit2.Call;
 
 public class RegisterAccountActivity extends AppCompatActivity {
     EditText email, username, password, firstName, lastName, birthdate;

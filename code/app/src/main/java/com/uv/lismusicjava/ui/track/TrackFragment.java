@@ -25,11 +25,12 @@ import com.uv.lismusicjava.track.Track;
 import com.uv.lismusicjava.ui.track.adapter.TrackAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TrackFragment extends Fragment implements TrackAdapter.OnItemClickListener {
 
     private TrackViewModel mViewModel;
-    private ArrayList<Track> listTracks;
+    private ArrayList<Track> listTracks = new ArrayList<>();
     private RecyclerView recyclerTracks;
     private TrackAdapter trackAdapter;
     private ImageView cover;
@@ -48,8 +49,8 @@ public class TrackFragment extends Fragment implements TrackAdapter.OnItemClickL
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(TrackViewModel.class);
         TrackFragmentArgs args = TrackFragmentArgs.fromBundle(getArguments());
         Playlist playlist = args.getPlaylist();
@@ -57,9 +58,22 @@ public class TrackFragment extends Fragment implements TrackAdapter.OnItemClickL
             title.setText(playlist.getTitle());
             artist.setText(playlist.getOwner());
             Glide.with(this).load(playlist.getCover()).into(cover);
+            mViewModel.init();
+            mViewModel.getTracksPlaylist(playlist.getIdPlaylist()).observe(getViewLifecycleOwner(), response ->{
+                List<Track> trackList = response;
+                if(trackList != null){
+                    listTracks.clear();
+                    listTracks.addAll(trackList);
+                    setupRecyclerView();
+                }
+            });
         }
+    }
 
-        //setupRecyclerView();
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        System.out.println("Se inicia la actividad");
     }
 
     private void setupRecyclerView(){

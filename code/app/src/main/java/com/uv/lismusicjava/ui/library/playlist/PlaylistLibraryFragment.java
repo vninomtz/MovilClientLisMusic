@@ -29,7 +29,7 @@ import java.util.List;
 public class PlaylistLibraryFragment extends Fragment implements PlaylistAdapter.ListItemClick {
 
     RecyclerView recyclerPlaylist;
-    ArrayList<Playlist> listPlaylist = new ArrayList<>();
+    ArrayList<Playlist> listPlaylist;
     PlaylistLibraryViewModel playlistViewModel;
     PlaylistAdapter playlistAdapter;
 
@@ -38,34 +38,34 @@ public class PlaylistLibraryFragment extends Fragment implements PlaylistAdapter
                              @Nullable Bundle savedInstanceState) {
         View viewFragment = inflater.inflate(R.layout.fragment_playlist_library, container, false);
         recyclerPlaylist = viewFragment.findViewById(R.id.recyclerView_playlist_library);
-
-        playlistViewModel = ViewModelProviders.of(this).get(PlaylistLibraryViewModel.class);
-        playlistViewModel.init();
-        playlistViewModel.getPlaylistRepository().observe(getViewLifecycleOwner(), playlistResponse -> {
-            List<Playlist> playlists = playlistResponse;
-            if(playlists != null){
-                listPlaylist.clear();
-                listPlaylist.addAll(playlists);
-                playlistAdapter.notifyDataSetChanged();
-            }
-
-
-        });
-        setupRecyclerView();
         return viewFragment;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        playlistViewModel = ViewModelProviders.of(this).get(PlaylistLibraryViewModel.class);
+        playlistViewModel.init();
+        playlistViewModel.getPlaylistRepository().observe(getViewLifecycleOwner(), playlistResponse -> {
+            List<Playlist> playlists = playlistResponse;
+            if(playlists != null){
+                listPlaylist  = new ArrayList<>();
+                listPlaylist.addAll(playlists);
+                setupRecyclerView();
+            }
+        });
+        playlistViewModel.getPlaylistError().observe(getViewLifecycleOwner(), response ->{
+            Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();
+        });
+
     }
 
     private void setupRecyclerView() {
         if (playlistAdapter == null) {
             playlistAdapter = new PlaylistAdapter(listPlaylist, this, this.getContext());
+            recyclerPlaylist.setAdapter(playlistAdapter);
             recyclerPlaylist.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerPlaylist.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-            recyclerPlaylist.setAdapter(playlistAdapter);
         } else {
             playlistAdapter.notifyDataSetChanged();
         }

@@ -3,13 +3,12 @@ package com.uv.lismusicjava;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
+import android.widget.Toast;
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
-import com.facebook.login.widget.LoginButton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.uv.lismusicjava.ui.login.LoginActivity;
 import com.uv.lismusicjava.utils.SingletonAccount;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -35,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
             //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
             NavigationUI.setupWithNavController(navView, navController);
+            Toast.makeText(this, "Welcome " + SingletonAccount.getSingletonAccount().getFirstName(), Toast.LENGTH_SHORT).show();
         }
     }
 
