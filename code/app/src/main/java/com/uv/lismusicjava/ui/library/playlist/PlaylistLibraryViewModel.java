@@ -12,18 +12,24 @@ import java.util.List;
 
 public class PlaylistLibraryViewModel extends ViewModel {
     private String idAccount = SingletonAccount.getSingletonAccount().getIdAccount();
-    private MutableLiveData<List<Playlist>> mutableLiveData;
+    private MutableLiveData<List<Playlist>> mutableLiveData = new MutableLiveData<>();
+    private  MutableLiveData<String> playlistError;
     private PlaylistRepository playlistRepository;
 
     public void init(){
-        if(mutableLiveData != null){
+        if(playlistRepository != null){
             return;
         }
         playlistRepository = PlaylistRepository.getInstance();
         mutableLiveData = playlistRepository.getPlaylistAccount(idAccount);
+        playlistError = playlistRepository.getPlaylistError();
     }
+
 
     public LiveData<List<Playlist>> getPlaylistRepository(){
         return mutableLiveData;
+    }
+    public LiveData<String> getPlaylistError(){
+        return playlistError;
     }
 }
