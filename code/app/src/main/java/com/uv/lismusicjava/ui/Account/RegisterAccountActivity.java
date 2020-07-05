@@ -1,7 +1,9 @@
 package com.uv.lismusicjava.ui.Account;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.DatePickerDialog;
@@ -24,12 +26,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.uv.lismusicjava.Account.AccountApi;
-import com.uv.lismusicjava.Account.AccountRepository;
+import com.uv.lismusicjava.Account.Account;
 import com.uv.lismusicjava.HomeActivity;
 import com.uv.lismusicjava.LoginActivity;
 import com.uv.lismusicjava.R;
-import com.uv.lismusicjava.domain.Account;
 import com.uv.lismusicjava.jsonmanagement.SingletonRequestQueue;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,12 +53,19 @@ public class RegisterAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_account);
         configElementsActivity();
-        showTermsAndConditions();
 
     }
 
 
     private void configElementsActivity(){
+//        accountViewModel = ViewModelProviders.of(this).get(AccountViewModel.class);
+//        accountViewModel.init();
+//        accountViewModel.saveAccountRepository().observe((LifecycleOwner) getLifecycle(), accountResponse -> {
+//            Account account = accountResponse;
+//            if(account !=null){
+//                System.out.println(account.getFirstName());;
+//            }
+//        });
         email = findViewById(R.id.textEditEmail);
         firstName = findViewById(R.id.textEditFirstName);
         lastName = findViewById(R.id.textEditLastName);
@@ -92,7 +99,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
     }
 
 
-    private void showTermsAndConditions() {
+    public void showTermsAndConditions(View view) {
         TextView termsAndConditions = findViewById(R.id.textViewTermsAndConditions);
         termsAndConditions.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
         termsAndConditions.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +164,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
         paramsAccountMap.put("typeRegister", account.getSocialMedia());
         return paramsAccountMap;
     }
-    private Account getValuesAccountRegistered(){
+    private com.uv.lismusicjava.Account.Account getValuesAccountRegistered(){
         String emailJoined = email.getText().toString();
         String firstNameJoined = firstName.getText().toString();
         String lastNameJoined = lastName.getText().toString();
@@ -166,7 +173,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
         String birthDateJoined = birthdate.getText().toString();
         String genderJoined = getGender();
 
-        Account account = new Account(firstNameJoined,lastNameJoined,emailJoined,userNameJoined,
+        Account account = new com.uv.lismusicjava.Account.Account(firstNameJoined,lastNameJoined,emailJoined,userNameJoined,
                 passwordJoined,genderJoined,null,birthDateJoined, "System");
         return account;
 
