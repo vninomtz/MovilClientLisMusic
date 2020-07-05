@@ -6,24 +6,30 @@ import androidx.lifecycle.ViewModel;
 
 import com.uv.lismusicjava.artist.Artist;
 import com.uv.lismusicjava.artist.ArtistRepository;
+import com.uv.lismusicjava.playlist.Playlist;
+import com.uv.lismusicjava.playlist.PlaylistRepository;
 import com.uv.lismusicjava.utils.SingletonAccount;
 
 import java.util.List;
 
 public class ArtistLibraryViewModel extends ViewModel {
     private String idAccount = SingletonAccount.getSingletonAccount().getIdAccount();
-    private MutableLiveData<List<Artist>> mutableLiveData;
+    private MutableLiveData<List<Artist>> artistsLiveData = new MutableLiveData<>();
     private ArtistRepository artistRepository;
+    private  MutableLiveData<String> artistError = new MutableLiveData<>();
 
     public void init(){
-        if(mutableLiveData != null){
+        if(artistRepository != null){
             return;
         }
         artistRepository = ArtistRepository.getInstance();
-        mutableLiveData = artistRepository.getPlaylistAccount(idAccount);
+        artistsLiveData = artistRepository.getArtistLikeofAccount(idAccount);
+        artistError = artistRepository.getArtistError();
     }
-
-    public LiveData<List<Artist>> getArtistsRepository(){
-        return mutableLiveData;
+    public LiveData<List<Artist>> getArtistsLiveData(){
+        return artistsLiveData;
+    }
+    public LiveData<String> getArtistsError(){
+        return artistError;
     }
 }

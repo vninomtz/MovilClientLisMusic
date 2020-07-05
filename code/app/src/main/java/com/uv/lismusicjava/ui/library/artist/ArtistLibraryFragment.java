@@ -21,10 +21,9 @@ import java.util.List;
  */
 public class ArtistLibraryFragment extends Fragment implements ArtistsLikeAdapter.ListItemClick {
     private RecyclerView recyclerArtistsView;
-    ArrayList<Artist> listArtists = new ArrayList<>();;
+    ArrayList<Artist> listArtists;
     ArtistLibraryViewModel artistLibraryViewModel;
     ArtistsLikeAdapter artistsLikeAdapter;
-
 
     public ArtistLibraryFragment() {
 
@@ -41,13 +40,17 @@ public class ArtistLibraryFragment extends Fragment implements ArtistsLikeAdapte
         artistLibraryViewModel = ViewModelProviders.of(this).get(ArtistLibraryViewModel.class);
         artistLibraryViewModel.init();
 
-        artistLibraryViewModel.getArtistsRepository().observe(getViewLifecycleOwner(), artistReponse -> {
+        artistLibraryViewModel.getArtistsLiveData().observe(getViewLifecycleOwner(), artistReponse -> {
             List<Artist> artists = artistReponse;
             if(artists != null){
-                listArtists.clear();
+                listArtists =  new ArrayList<>();
                 listArtists.addAll(artists);
                 setupRecyclerView();
             }
+        });
+
+        artistLibraryViewModel.getArtistsError().observe(getViewLifecycleOwner(), response -> {
+            Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();
         });
 
         return viewFragment;
