@@ -56,9 +56,9 @@ public class ArtistLibraryFragment extends Fragment implements ArtistsLikeAdapte
     private void setupRecyclerView(){
         if(artistsLikeAdapter == null){
             artistsLikeAdapter = new ArtistsLikeAdapter(listArtists, this, this.getContext());
+            recyclerArtistsView.setAdapter(artistsLikeAdapter);
             recyclerArtistsView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerArtistsView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-            recyclerArtistsView.setAdapter(artistsLikeAdapter);
         }else{
             artistsLikeAdapter.notifyDataSetChanged();
         }
