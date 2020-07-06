@@ -15,7 +15,7 @@ import retrofit2.Response;
 
 public class ArtistRepository {
     private static ArtistRepository artistRepository;
-    MutableLiveData<List<Artist>> artistData = new MutableLiveData<>();
+
     MutableLiveData<String> artistError = new MutableLiveData<>();
     private ArtistApi artistApi;
 
@@ -29,6 +29,7 @@ public class ArtistRepository {
         artistApi = ReaderService.createService(ArtistApi.class);
     }
     public MutableLiveData<List<Artist>> getArtistLikeofAccount(String idAccount){
+        MutableLiveData<List<Artist>> artistData = new MutableLiveData<>();
         artistApi.getArtistsLikeOfAccount(idAccount).enqueue(new Callback<List<Artist>>() {
             @Override
             public void onResponse(Call<List<Artist>> call, Response<List<Artist>> response) {
@@ -36,13 +37,11 @@ public class ArtistRepository {
                     artistData.setValue(response.body());
                 }
             }
-
             @Override
             public void onFailure(Call<List<Artist>> call, Throwable t) {
             artistError.setValue("Connection error, please try again");
             }
         });
-
         return artistData;
     }
 

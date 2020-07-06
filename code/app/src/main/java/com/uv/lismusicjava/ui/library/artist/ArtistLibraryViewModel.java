@@ -14,12 +14,12 @@ import java.util.List;
 
 public class ArtistLibraryViewModel extends ViewModel {
     private String idAccount = SingletonAccount.getSingletonAccount().getIdAccount();
-    private MutableLiveData<List<Artist>> artistsLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<Artist>> artistsLiveData;
     private ArtistRepository artistRepository;
     private  MutableLiveData<String> artistError = new MutableLiveData<>();
 
     public void init(){
-        if(artistRepository != null){
+        if(artistsLiveData != null){
             return;
         }
         artistRepository = ArtistRepository.getInstance();

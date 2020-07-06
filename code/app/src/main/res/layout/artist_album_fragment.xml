@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.library.artistalbums.ArtistAlbumFragment"
+    android:background="@color/primaryColor"
+    android:layout_marginBottom="50dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/primaryColor">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/image_fragment_artistAlbums"
+                    android:layout_margin="10dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/ic_baseline_image_200"
+                    app:civ_border_width="0dp"
+                    app:civ_border_color="#80000000"/>
+
+
+                <TextView
+                    android:id="@+id/textView_fragment_artistName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name artist"
+                    android:layout_toRightOf="@+id/image_fragment_artistAlbums"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/primaryTextColor"/>
+                <TextView
+                    android:id="@+id/textView_artist_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/textView_fragment_artistName"
+                    android:layout_toRightOf="@+id/image_fragment_artistAlbums"
+                    android:layout_centerHorizontal="true"
+                    android:text="Name owner"
+                    android:textSize="15sp"
+                    android:textColor="@color/primaryTextColor"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+            </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_artistAlbums"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+    </ScrollView>
+
+   
+
+</LinearLayout>

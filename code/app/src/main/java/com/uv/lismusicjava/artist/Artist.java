@@ -1,8 +1,11 @@
 package com.uv.lismusicjava.artist;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Artist {
+public class Artist implements Parcelable {
     @SerializedName("idArtist")
     private String idArtist;
     @SerializedName("name")
@@ -21,6 +24,26 @@ public class Artist {
         this.registerDate = registerDate;
         this.description = description;
     }
+
+    protected Artist(Parcel in) {
+        idArtist = in.readString();
+        name = in.readString();
+        cover = in.readString();
+        registerDate = in.readString();
+        description = in.readString();
+    }
+
+    public static final Creator<Artist> CREATOR = new Creator<Artist>() {
+        @Override
+        public Artist createFromParcel(Parcel in) {
+            return new Artist(in);
+        }
+
+        @Override
+        public Artist[] newArray(int size) {
+            return new Artist[size];
+        }
+    };
 
     public String getIdArtist() {
         return idArtist;
@@ -60,5 +83,19 @@ public class Artist {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(idArtist);
+        dest.writeString(name);
+        dest.writeString(cover);
+        dest.writeString(registerDate);
+        dest.writeString(description);
     }
 }

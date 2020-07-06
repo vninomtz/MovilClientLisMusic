@@ -9,13 +9,13 @@ import com.uv.lismusicjava.pojo.LoginRequest;
 import com.uv.lismusicjava.pojo.LoginResponse;
 
 public class LoginViewModel extends ViewModel {
-    private MutableLiveData<LoginResponse> loginObserver = new MutableLiveData<>();
+    private MutableLiveData<LoginResponse> loginObserver;
     private MutableLiveData<String> loginError = new MutableLiveData<>();
     private MutableLiveData<String> toastMessageObserver = new MutableLiveData<>();
     private AccountRepository accountRepository;
 
     public void init(){
-        if(accountRepository != null){
+        if(loginObserver != null){
             return;
         }
 

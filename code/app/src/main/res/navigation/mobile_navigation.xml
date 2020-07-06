@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_navigation_library_to_trackFragment"
             app:destination="@id/trackFragment" />
+        <action
+            android:id="@+id/action_navigation_artist_to_artistAlbumFragment"
+            app:destination="@+id/artistAlbumFragment"/>
     </fragment>
     <fragment
         android:id="@+id/navigation_playlistLibraryFragment"
@@ -46,7 +49,7 @@
         tools:layout="@layout/fragment_playlist_library" />
     <fragment
         android:id="@+id/navigation_artistLibraryFragment"
-        android:name="com.uv.lismusicjava.ui.library.ArtistLibraryFragment"
+        android:name="com.uv.lismusicjava.ui.library.artist.ArtistLibraryFragment"
         android:label="fragment_artist_library"
         tools:layout="@layout/fragment_artist_library" />
     <fragment
@@ -62,6 +65,17 @@
         <argument
             android:name="playlist"
             app:argType="com.uv.lismusicjava.playlist.Playlist"
+            app:nullable="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/artistAlbumFragment"
+        android:name="com.uv.lismusicjava.ui.library.artistalbums.ArtistAlbumFragment"
+        android:label="artistAlbum_fragment"
+        tools:layout="@layout/artist_album_fragment" >
+        <argument
+            android:name="artist"
+            app:argType="com.uv.lismusicjava.artist.Artist"
             app:nullable="true" />
     </fragment>
 </navigation>

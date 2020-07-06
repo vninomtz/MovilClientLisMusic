@@ -21,7 +21,7 @@ public class AccountRepository {
     private static AccountRepository accountRepository;
     MutableLiveData<Account> accountData  = new MutableLiveData<>();
     MutableLiveData<String> loginError = new MutableLiveData<>();
-    MutableLiveData<LoginResponse> loginData  = new MutableLiveData<>();
+
 
     private AccountApi accountApi;
 
@@ -54,6 +54,7 @@ public class AccountRepository {
     }
 
     public MutableLiveData<LoginResponse> loginAccount(LoginRequest loginRequest){
+        MutableLiveData<LoginResponse> loginData  = new MutableLiveData<>();
         accountApi.loginAccount(loginRequest).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {

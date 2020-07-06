@@ -17,7 +17,7 @@ public class PlaylistLibraryViewModel extends ViewModel {
     private PlaylistRepository playlistRepository;
 
     public void init(){
-        if(playlistRepository != null){
+       if(playlistRepository != null){
             return;
         }
         playlistRepository = PlaylistRepository.getInstance();

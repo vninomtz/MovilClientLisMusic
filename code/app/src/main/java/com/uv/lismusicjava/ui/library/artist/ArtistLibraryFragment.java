@@ -2,6 +2,7 @@ package com.uv.lismusicjava.ui.library.artist;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.uv.lismusicjava.R;
 import com.uv.lismusicjava.artist.Artist;
+import com.uv.lismusicjava.ui.library.LibraryFragmentDirections;
 import com.uv.lismusicjava.ui.library.adapters.ArtistsLikeAdapter;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,7 @@ import java.util.List;
  */
 public class ArtistLibraryFragment extends Fragment implements ArtistsLikeAdapter.ListItemClick {
     private RecyclerView recyclerArtistsView;
-    ArrayList<Artist> listArtists;
+    ArrayList<Artist> listArtists = new ArrayList<>();;
     ArtistLibraryViewModel artistLibraryViewModel;
     ArtistsLikeAdapter artistsLikeAdapter;
 
@@ -42,16 +44,13 @@ public class ArtistLibraryFragment extends Fragment implements ArtistsLikeAdapte
 
         artistLibraryViewModel.getArtistsLiveData().observe(getViewLifecycleOwner(), artistReponse -> {
             List<Artist> artists = artistReponse;
-            if(artists != null){
-                listArtists =  new ArrayList<>();
                 listArtists.addAll(artists);
-                setupRecyclerView();
-            }
+                artistsLikeAdapter.notifyDataSetChanged();
         });
-
         artistLibraryViewModel.getArtistsError().observe(getViewLifecycleOwner(), response -> {
             Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();
         });
+        setupRecyclerView();
 
         return viewFragment;
     }
@@ -71,6 +70,9 @@ public class ArtistLibraryFragment extends Fragment implements ArtistsLikeAdapte
     public void onListItemClick(int clickedItem) {
         String message = "Artist clicked: " + listArtists.get(clickedItem).getName();
         Toast.makeText(getContext(),message, Toast.LENGTH_SHORT).show();
+        Artist artist = listArtists.get(clickedItem);
+        LibraryFragmentDirections.ActionNavigationArtistToArtistAlbumFragment action = LibraryFragmentDirections.actionNavigationArtistToArtistAlbumFragment(artist);
+        NavHostFragment.findNavController(this).navigate(action);
     }
 }
 
