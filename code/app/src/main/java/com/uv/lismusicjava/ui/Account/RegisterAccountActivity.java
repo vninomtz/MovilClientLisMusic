@@ -1,16 +1,11 @@
 package com.uv.lismusicjava.ui.Account;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProviders;
-
+import androidx.lifecycle.ViewModelProvider;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.CheckBox;
@@ -20,20 +15,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.uv.lismusicjava.Account.Account;
-import com.uv.lismusicjava.HomeActivity;
 import com.uv.lismusicjava.ui.login.LoginActivity;
 import com.uv.lismusicjava.R;
-import com.uv.lismusicjava.jsonmanagement.SingletonRequestQueue;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 public class RegisterAccountActivity extends AppCompatActivity {
@@ -42,25 +26,20 @@ public class RegisterAccountActivity extends AppCompatActivity {
     RadioGroup radioGroupGender;
     RadioButton radioButtonMale, radioButtonFemale;
     AccountViewModel accountViewModel;
+    private static final String coverDefault = "defaultAccountCover.png";
+    private static final String systemRegister = "System";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_account);
         configElementsActivity();
+        setUpViewModel();
 
     }
 
 
     private void configElementsActivity(){
-//        accountViewModel = ViewModelProviders.of(this).get(AccountViewModel.class);
-//        accountViewModel.init();
-//        accountViewModel.saveAccountRepository().observe((LifecycleOwner) getLifecycle(), accountResponse -> {
-//            Account account = accountResponse;
-//            if(account !=null){
-//                System.out.println(account.getFirstName());;
-//            }
-//        });
         email = findViewById(R.id.textEditEmail);
         firstName = findViewById(R.id.textEditFirstName);
         lastName = findViewById(R.id.textEditLastName);
@@ -70,10 +49,40 @@ public class RegisterAccountActivity extends AppCompatActivity {
         radioGroupGender = findViewById(R.id.radioGroupGenders);
         radioButtonMale = findViewById(R.id.radioButtonMale);
         radioButtonFemale = findViewById(R.id.radioButtonFemale);
+        checkBoxTermsAndConditions = findViewById(R.id.checkBoxTermsAndConditions);
+    }
+    public  void setUpViewModel(){
+        accountViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
+        accountViewModel.init();
+        accountViewModel.getToastObserver().observe(this, response ->{
+            Toast.makeText(this,response, Toast.LENGTH_SHORT).show();
+        });
     }
 
     public void registerAccount(View view) {
-        validateNotEmptyFields();
+        Account account= getValuesAccountRegistered();
+        if(validateEmail(account.getEmail())){
+            if(validateSelectedTermsAndConditions()){
+                if(accountViewModel.validateFieldsRegister(account)){
+                    accountViewModel.getRegisterAccountResponse().observe(this, response ->{
+                        if(response!=null){
+                            goLoginScreen();
+                            cleanFields();
+                        }
+                    });
+                }else{
+                    accountViewModel.getRegisterAccountError().observe(this,messageError ->{
+                        Toast.makeText(this, messageError,Toast.LENGTH_SHORT).show();
+                    });
+                }
+            }else{
+                Toast.makeText(this,"Please accept terms and conditions",Toast.LENGTH_SHORT).show();
+            }
+
+        }else{
+            Toast.makeText(this,"Please enter a valid email",Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void onRadioButtonClick(View view) {
@@ -105,61 +114,7 @@ public class RegisterAccountActivity extends AppCompatActivity {
         });
     }
 
-    private void goHomeScreen() {
-        Intent intent = new Intent(this, HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-
-    private void createAccountPOST() {
-        Map<String,String> paramsAccountMapJoined = putValuesForPost();
-        JSONObject paramsAccount = new JSONObject(paramsAccountMapJoined);
-        String ip = getString(R.string.ip);
-        final String url = "http://" + ip + ":5000/account";
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, paramsAccount, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.i("Mensaje de exito", "Respuesta en JSON: " + response);
-                cleanFields();
-                goLoginScreen();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String body;
-               // String statusCode = String.valueOf(error.networkResponse.statusCode);
-                if(error.networkResponse.data!=null){
-                    try {
-                        body = new String(error.networkResponse.data, StandardCharsets.UTF_8);
-                        JSONObject jsonObjectError = new JSONObject(body);
-                        String jsonErrorString = jsonObjectError.getString("error");
-                        Log.i("Register", "Error in JSON: " + body);
-                        Toast.makeText(getApplicationContext(),jsonErrorString,Toast.LENGTH_SHORT).show();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        SingletonRequestQueue.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
-    }
-
-    private Map<String, String> putValuesForPost() {
-        Account account = getValuesAccountRegistered();
-        Map<String, String> paramsAccountMap = new HashMap();
-        paramsAccountMap.put("firstName", account.getFirstName());
-        paramsAccountMap.put("lastName", account.getLastName());
-        paramsAccountMap.put("email", account.getEmail());
-        paramsAccountMap.put("password", account.getPassword());
-        paramsAccountMap.put("userName", account.getUsername());
-        paramsAccountMap.put("gender", account.getGender());
-        paramsAccountMap.put("birthday", account.getBirthDate());
-        paramsAccountMap.put("cover", account.getCover());
-        paramsAccountMap.put("typeRegister", account.getSocialMedia());
-        return paramsAccountMap;
-    }
-    private com.uv.lismusicjava.Account.Account getValuesAccountRegistered(){
+    private Account getValuesAccountRegistered(){
         String emailJoined = email.getText().toString();
         String firstNameJoined = firstName.getText().toString();
         String lastNameJoined = lastName.getText().toString();
@@ -168,66 +123,22 @@ public class RegisterAccountActivity extends AppCompatActivity {
         String birthDateJoined = birthdate.getText().toString();
         String genderJoined = getGender();
 
-        Account account = new com.uv.lismusicjava.Account.Account(firstNameJoined,lastNameJoined,emailJoined,userNameJoined,
-                passwordJoined,genderJoined,null,birthDateJoined, "System");
-        return account;
-
+        return new Account(firstNameJoined,lastNameJoined,emailJoined,userNameJoined,
+                passwordJoined,genderJoined,coverDefault,birthDateJoined, systemRegister);
+    }
+    private boolean validateSelectedTermsAndConditions(){
+        return checkBoxTermsAndConditions.isChecked();
     }
     private String getGender(){
-        String genderResult;
+        String genderResult = "";
         if(radioButtonMale.isChecked()){
             genderResult = "Male";
-            return genderResult;
-        }
-        if(radioButtonFemale.isChecked()){
+        }else if (radioButtonFemale.isChecked()){
             genderResult = "Female";
-            return genderResult;
         }
-        return genderResult ="";
+        return genderResult;
     }
-    public boolean validateNotEmptyFields() {
-        email = findViewById(R.id.textEditEmail);
-        username = findViewById(R.id.textEditUsername);
-        password = findViewById(R.id.textEditPassword);
-        firstName = findViewById(R.id.textEditFirstName);
-        lastName = findViewById(R.id.textEditLastName);
-        checkBoxTermsAndConditions = findViewById(R.id.checkBoxTermsAndConditions);
-        String emailJoined = email.getText().toString();
-        String usernameJoined = username.getText().toString();
-        String passwordJoined = password.getText().toString();
-        String firstNameJoined = firstName.getText().toString();
-        String lastNameJoined = lastName.getText().toString();
 
-        if (emailJoined.isEmpty()) {
-            Toast.makeText(this, "Please enter an email", Toast.LENGTH_SHORT).show();
-        }
-        if(!validateEmail(emailJoined)){
-            email.setError("Invalid email");
-            Toast.makeText(this, "Invalid Email", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (usernameJoined.isEmpty()) {
-            Toast.makeText(this, "Please enter an username", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (passwordJoined.isEmpty()) {
-            Toast.makeText(this, "Please enter a password", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (firstNameJoined.isEmpty()) {
-            Toast.makeText(this, "Please enter a first name", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (lastNameJoined.isEmpty()) {
-            Toast.makeText(this, "Please enter a last name", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if (!checkBoxTermsAndConditions.isChecked()) {
-            Toast.makeText(this, "You should accept Terms and Conditions", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        return true;
-    }
     private void cleanFields(){
         email.setText("");
         username.setText("");
