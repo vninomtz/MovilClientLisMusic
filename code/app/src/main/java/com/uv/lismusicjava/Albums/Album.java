@@ -17,14 +17,14 @@ public class Album implements Parcelable {
     @SerializedName("recordCompany")
     private String recordCompany;
     @SerializedName("idMusicGender")
-    private int idMusicGender;
+    private String idMusicGender;
     @SerializedName("idAlbumType")
     private int idAlbumType;
     @SerializedName("idArtist")
     private String idArtist;
 
     public Album(String idAlbum, String title, String cover, String publication, String recordCompany,
-                 int idMusicGender, int idAlbumType, String idArtist) {
+                 String idMusicGender, int idAlbumType, String idArtist) {
         this.idAlbum = idAlbum;
         this.title = title;
         this.cover = cover;
@@ -41,7 +41,7 @@ public class Album implements Parcelable {
         cover = in.readString();
         publication = in.readString();
         recordCompany = in.readString();
-        idMusicGender = in.readInt();
+        idMusicGender = in.readString();
         idAlbumType = in.readInt();
         idArtist = in.readString();
     }
@@ -98,11 +98,11 @@ public class Album implements Parcelable {
         this.recordCompany = recordCompany;
     }
 
-    public int getIdMusicGender() {
+    public String getIdMusicGender() {
         return idMusicGender;
     }
 
-    public void setIdMusicGender(int idMusicGender) {
+    public void setIdMusicGender(String idMusicGender) {
         this.idMusicGender = idMusicGender;
     }
 
@@ -134,7 +134,7 @@ public class Album implements Parcelable {
         dest.writeString(cover);
         dest.writeString(publication);
         dest.writeString(recordCompany);
-        dest.writeInt(idMusicGender);
+        dest.writeString(idMusicGender);
         dest.writeInt(idAlbumType);
         dest.writeString(idArtist);
     }

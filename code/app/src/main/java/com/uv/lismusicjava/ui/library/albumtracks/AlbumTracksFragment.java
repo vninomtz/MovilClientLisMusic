@@ -69,6 +69,7 @@ public class AlbumTracksFragment extends Fragment  implements TracksAlbumAdapter
         artist = args.getArtist();
         textView_artistName.setText( artist.getName());
         textView_albumTitle.setText(album.getTitle());
+        textView_genderName.setText(album.getIdMusicGender());
         Glide.with(this).load(album.getCover()).into(image_albumCover);
 
         albumTracksViewModel.init(album.getIdAlbum());
