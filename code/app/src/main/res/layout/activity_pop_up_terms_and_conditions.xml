@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="169dp"
+        android:layout_height="175dp"
         android:layout_gravity="center"
         android:layout_marginTop="56dp"
         android:src="@mipmap/ic_launcher_lismusic"
@@ -22,14 +22,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_width="336dp"
-        android:layout_height="165dp"
-        android:layout_marginTop="52dp"
+        android:layout_width="334dp"
+        android:layout_height="270dp"
+        android:layout_marginTop="28dp"
         android:text="@string/terms_and_conditions"
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
         android:textColor="@color/primaryTextColor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 

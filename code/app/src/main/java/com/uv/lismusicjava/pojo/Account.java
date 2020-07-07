@@ -30,6 +30,20 @@ public class Account {
         this.contentCreator = contentCreator;
         this.accesToken = accesToken;
     }
+    public Account(String birthday,Boolean contentCreator,String cover,String created,String email,
+                   String firstName,String gender, String idAccount,String lastName,String updated, String userName) {
+        this.idAccount = idAccount;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.userName = userName;
+        this.gender = gender;
+        this.cover = cover;
+        this.created = created;
+        this.updated = updated;
+        this.birthday = birthday;
+        this.contentCreator = contentCreator;
+    }
 
     public String getIdAccount() {
         return idAccount;

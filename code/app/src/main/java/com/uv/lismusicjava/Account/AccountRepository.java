@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.uv.lismusicjava.pojo.LoginRequest;
 import com.uv.lismusicjava.pojo.LoginResponse;
+import com.uv.lismusicjava.pojo.RegisterAccountRequest;
+import com.uv.lismusicjava.pojo.RegisterAccountResponse;
 import com.uv.lismusicjava.services.WriterService;
 
 import org.json.JSONException;
@@ -19,7 +21,8 @@ import retrofit2.Response;
 
 public class AccountRepository {
     private static AccountRepository accountRepository;
-    MutableLiveData<Account> accountData  = new MutableLiveData<>();
+    MutableLiveData<RegisterAccountResponse> accountData  = new MutableLiveData<>();
+    MutableLiveData<String> accountError  = new MutableLiveData<>();
     MutableLiveData<String> loginError = new MutableLiveData<>();
 
 
@@ -36,21 +39,30 @@ public class AccountRepository {
         accountApi = WriterService.createService(AccountApi.class);
     }
 
-    public MutableLiveData<Account> saveAccountData(Account account){
-        accountApi.saveAccount(account).enqueue(new Callback<Account>() {
+    public MutableLiveData<RegisterAccountResponse> saveAccountData(RegisterAccountRequest registerAccountRequest){
+        accountApi.saveAccount(registerAccountRequest).enqueue(new Callback<RegisterAccountResponse>() {
             @Override
-            public void onResponse(Call<Account> call, Response<Account> response) {
+            public void onResponse(Call<RegisterAccountResponse> call, Response<RegisterAccountResponse> response) {
                 if(response.isSuccessful()){
                     accountData.setValue(response.body());
+                }else{
+                    try{
+                        JSONObject jsonObject = new JSONObject(response.errorBody().string());
+                        accountError.setValue(jsonObject.getString("error"));
+                    }catch (JSONException | IOException e){
+                        e.printStackTrace();
+                    }
                 }
             }
-
             @Override
-            public void onFailure(Call<Account> call, Throwable t) {
-                accountData.setValue(null);
+            public void onFailure(Call<RegisterAccountResponse> call, Throwable t) {
+                accountError.setValue("Connection error, please try again");
             }
         });
         return accountData;
+    }
+    public MutableLiveData<String> getRegisterAccountError(){
+        return  accountError;
     }
 
     public MutableLiveData<LoginResponse> loginAccount(LoginRequest loginRequest){
