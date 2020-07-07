@@ -1,5 +1,8 @@
 package com.uv.lismusicjava.ui.library.artist;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
@@ -23,13 +26,9 @@ import java.util.List;
  */
 public class ArtistLibraryFragment extends Fragment implements ArtistsLikeAdapter.ListItemClick {
     private RecyclerView recyclerArtistsView;
-    ArrayList<Artist> listArtists = new ArrayList<>();;
+    ArrayList<Artist> listArtists;
     ArtistLibraryViewModel artistLibraryViewModel;
     ArtistsLikeAdapter artistsLikeAdapter;
-
-    public ArtistLibraryFragment() {
-
-    }
 
 
     @Override
@@ -39,20 +38,26 @@ public class ArtistLibraryFragment extends Fragment implements ArtistsLikeAdapte
         View viewFragment = inflater.inflate(R.layout.fragment_artist_library, container, false);
         recyclerArtistsView = viewFragment.findViewById(R.id.recyclerView_artist_library);
 
+        return viewFragment;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         artistLibraryViewModel = ViewModelProviders.of(this).get(ArtistLibraryViewModel.class);
         artistLibraryViewModel.init();
 
         artistLibraryViewModel.getArtistsLiveData().observe(getViewLifecycleOwner(), artistReponse -> {
             List<Artist> artists = artistReponse;
+            if(artists != null){
+                listArtists = new ArrayList<>();
                 listArtists.addAll(artists);
-                artistsLikeAdapter.notifyDataSetChanged();
+                setupRecyclerView();
+            }
+
         });
         artistLibraryViewModel.getArtistsError().observe(getViewLifecycleOwner(), response -> {
             Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();
         });
-        setupRecyclerView();
-
-        return viewFragment;
     }
 
     private void setupRecyclerView(){

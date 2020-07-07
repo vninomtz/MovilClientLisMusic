@@ -9,7 +9,7 @@
     android:layout_marginLeft="0dp"
     android:layout_marginTop="10dp" >
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="2"
@@ -20,13 +20,23 @@
             android:id="@+id/textView_nameTrack_item_album_tracks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name artist"
+            android:text="Name track"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+           android:layout_toLeftOf="@+id/imageView_options"
+            android:layout_marginLeft="1dp"
             android:textSize="20sp"
-
-            android:layout_marginTop="15dp"
             android:textStyle="bold"
             android:textColor="@color/primaryTextColor"/>
+        <ImageView
+            android:id="@+id/imageView_options"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_more_vert_24"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

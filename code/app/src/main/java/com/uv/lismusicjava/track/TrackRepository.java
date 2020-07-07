@@ -13,6 +13,7 @@ import retrofit2.Response;
 public class TrackRepository {
     private static TrackRepository trackRepository;
     MutableLiveData<List<Track>> listMutableLiveData;
+    MutableLiveData<String> tracksOfAlbumError;
     private TrackApi trackApi;
     public static TrackRepository getInstance(){
         if(trackRepository == null){
@@ -41,5 +42,28 @@ public class TrackRepository {
             }
         });
         return listMutableLiveData;
+    }
+
+    public MutableLiveData<List<Track>> getTracksOfAlbum(String idAlbum, String token){
+        listMutableLiveData = new MutableLiveData<>();
+        trackApi.getTracksOfAlbum(idAlbum, token).enqueue(new Callback<List<Track>>() {
+            @Override
+            public void onResponse(Call<List<Track>> call, Response<List<Track>> response) {
+                listMutableLiveData.setValue(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Track>> call, Throwable t) {
+                tracksOfAlbumError.setValue("Connection error, please try again");
+            }
+        });
+
+        return listMutableLiveData;
+    }
+
+    public MutableLiveData<String> getTracksOfAlbumError(){
+        tracksOfAlbumError = new MutableLiveData<String>();
+        return tracksOfAlbumError;
     }
 }

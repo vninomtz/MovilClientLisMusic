@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.uv.lismusicjava.artist.Artist;
 import com.uv.lismusicjava.artist.ArtistRepository;
-import com.uv.lismusicjava.playlist.Playlist;
-import com.uv.lismusicjava.playlist.PlaylistRepository;
 import com.uv.lismusicjava.utils.SingletonAccount;
 
 import java.util.List;

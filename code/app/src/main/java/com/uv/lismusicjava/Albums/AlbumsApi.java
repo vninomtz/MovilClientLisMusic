@@ -1,5 +1,7 @@
 package com.uv.lismusicjava.Albums;
 
+import com.uv.lismusicjava.track.Track;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -13,4 +15,6 @@ public interface AlbumsApi {
 
     @GET("artist/{idArtist}/album")
     Call<List<Album>> getAlbumsOfArtist(@Path("idArtist") String idAccount, @Header("Authorization") String token);
+
+
 }

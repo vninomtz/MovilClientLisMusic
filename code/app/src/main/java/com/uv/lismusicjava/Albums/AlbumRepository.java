@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.JsonObject;
 import com.uv.lismusicjava.services.ReaderService;
+import com.uv.lismusicjava.track.Track;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,7 +22,7 @@ public class AlbumRepository {
     private static AlbumRepository albumRepository;
     MutableLiveData<List<Album>> albumData = new MutableLiveData<>();
 
-    MutableLiveData<String> albumsOfArtistError = new MutableLiveData<>();
+    MutableLiveData<String> albumsOfArtistError;
     private AlbumsApi albumsApi;
 
     public static  AlbumRepository getInstance(){
@@ -90,8 +91,10 @@ public class AlbumRepository {
 
 
     public MutableLiveData<String> getAlbumsOfArtistError(){
+        albumsOfArtistError = new MutableLiveData<>();
         return albumsOfArtistError;
     }
+
 
 
 
