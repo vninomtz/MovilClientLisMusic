@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/primaryColor"
+    android:layout_marginBottom="50dp"
+    tools:context=".ui.library.albumtracks.AlbumTracksFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/primaryColor">
+
+                <ImageView
+                    android:id="@+id/image_fragment_albumTracks"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_baseline_image_200"
+                    />
+
+                <TextView
+                    android:id="@+id/textView_title_fragment_albumTracks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Title album"
+                    android:layout_toRightOf="@+id/image_fragment_albumTracks"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/primaryTextColor"/>
+                <TextView
+                    android:id="@+id/textView_nameArtist_fragment_albumsTracks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView_title_fragment_albumTracks"
+                    android:layout_toRightOf="@+id/image_fragment_albumTracks"
+                    android:layout_centerHorizontal="true"
+                    android:text="Name artist"
+                    android:textSize="18sp"
+                    android:textColor="@color/primaryTextColor"/>
+                <TextView
+                    android:id="@+id/textView_gender_fragment_tracksAlbum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_below="@+id/textView_nameArtist_fragment_albumsTracks"
+                    android:layout_toRightOf="@+id/image_fragment_albumTracks"
+                    android:layout_centerHorizontal="true"
+                    android:text="Name Gender"
+                    android:textSize="15sp"
+                    android:textColor="@color/primaryTextColor"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+            </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_tracksAlbums"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

@@ -1,16 +1,6 @@
 package com.uv.lismusicjava.ui.library.artistalbums;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +8,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.uv.lismusicjava.Albums.Album;
-import com.uv.lismusicjava.Albums.AlbumRepository;
 import com.uv.lismusicjava.R;
 import com.uv.lismusicjava.artist.Artist;
+import com.uv.lismusicjava.ui.library.LibraryFragmentDirections;
 import com.uv.lismusicjava.ui.library.adapters.AlbumAdapter;
 
 import java.util.ArrayList;
@@ -37,6 +36,7 @@ public class ArtistAlbumFragment extends Fragment implements AlbumAdapter.ListIt
     private TextView artistName;
     private TextView artistDescription;
     private AlbumAdapter albumAdapter;
+    private Artist artist;
 
     public static ArtistAlbumFragment newInstance() {
         return new ArtistAlbumFragment();
@@ -59,7 +59,7 @@ public class ArtistAlbumFragment extends Fragment implements AlbumAdapter.ListIt
         super.onActivityCreated(savedInstanceState);
         artistAlbumViewModel = ViewModelProviders.of(this).get(ArtistAlbumViewModel.class);
         ArtistAlbumFragmentArgs artistArg = ArtistAlbumFragmentArgs.fromBundle(getArguments());
-        Artist artist = artistArg.getArtist();
+        artist = artistArg.getArtist();
         System.out.println("Artista: " + artist.getName());
         artistName.setText(artist.getName());
         Glide.with(this).load(artist.getCover()).into(artistImage);
@@ -92,7 +92,8 @@ public class ArtistAlbumFragment extends Fragment implements AlbumAdapter.ListIt
 
     @Override
     public void onListItemClick(int clickedItem) {
-        String message = "Album clicked: " + listAlbums.get(clickedItem).getTitle();
-        Toast.makeText(getContext(),message, Toast.LENGTH_SHORT).show();
+        Album albumSelected = listAlbums.get(clickedItem);
+        ArtistAlbumFragmentDirections.ActionArtistAlbumFragmentToAlbumTracksFragment action = ArtistAlbumFragmentDirections.actionArtistAlbumFragmentToAlbumTracksFragment(artist,albumSelected);
+        NavHostFragment.findNavController(this).navigate(action);
     }
 }

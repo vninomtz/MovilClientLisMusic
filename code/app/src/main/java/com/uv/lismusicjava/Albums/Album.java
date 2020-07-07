@@ -1,8 +1,11 @@
 package com.uv.lismusicjava.Albums;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Album {
+public class Album implements Parcelable {
     @SerializedName("idAlbum")
     private String idAlbum;
     @SerializedName("title")
@@ -31,6 +34,29 @@ public class Album {
         this.idAlbumType = idAlbumType;
         this.idArtist = idArtist;
     }
+
+    protected Album(Parcel in) {
+        idAlbum = in.readString();
+        title = in.readString();
+        cover = in.readString();
+        publication = in.readString();
+        recordCompany = in.readString();
+        idMusicGender = in.readInt();
+        idAlbumType = in.readInt();
+        idArtist = in.readString();
+    }
+
+    public static final Creator<Album> CREATOR = new Creator<Album>() {
+        @Override
+        public Album createFromParcel(Parcel in) {
+            return new Album(in);
+        }
+
+        @Override
+        public Album[] newArray(int size) {
+            return new Album[size];
+        }
+    };
 
     public String getIdAlbum() {
         return idAlbum;
@@ -94,5 +120,22 @@ public class Album {
 
     public void setIdArtist(String idArtist) {
         this.idArtist = idArtist;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(idAlbum);
+        dest.writeString(title);
+        dest.writeString(cover);
+        dest.writeString(publication);
+        dest.writeString(recordCompany);
+        dest.writeInt(idMusicGender);
+        dest.writeInt(idAlbumType);
+        dest.writeString(idArtist);
     }
 }
