@@ -7,14 +7,18 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.uv.lismusicjava.Account.Account;
 import com.uv.lismusicjava.ui.login.LoginActivity;
 import com.uv.lismusicjava.R;
@@ -156,5 +160,20 @@ public class RegisterAccountActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    public void showSheet(View view) {
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(RegisterAccountActivity.this, R.style.BottomSheetDialogTheme);
+        View bottomSheetView = LayoutInflater.from(getApplicationContext()).inflate(
+                R.layout.layout_bottom_sheet_player, (LinearLayout)findViewById(R.id.bottomSheetContainer)
+        );
+        bottomSheetView.findViewById(R.id.btn_play).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(RegisterAccountActivity.this,"play",Toast.LENGTH_SHORT).show();
+            }
+        });
+        bottomSheetDialog.setContentView(bottomSheetView);
+        bottomSheetDialog.show();
     }
 }

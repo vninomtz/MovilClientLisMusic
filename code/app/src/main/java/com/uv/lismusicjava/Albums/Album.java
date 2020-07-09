@@ -23,6 +23,8 @@ public class Album implements Parcelable {
     @SerializedName("idArtist")
     private String idArtist;
 
+
+
     public Album(String idAlbum, String title, String cover, String publication, String recordCompany,
                  String idMusicGender, int idAlbumType, String idArtist) {
         this.idAlbum = idAlbum;

@@ -64,7 +64,6 @@ public class ArtistAlbumFragment extends Fragment implements AlbumAdapter.ListIt
         artistName.setText(artist.getName());
         Glide.with(this).load(artist.getCover()).into(artistImage);
         artistDescription.setText(artist.getDescription());
-
         artistAlbumViewModel.init(artist.getIdArtist());
         artistAlbumViewModel.getAlbumsOfArtist().observe(getViewLifecycleOwner(), response -> {
             List<Album> albums = response;

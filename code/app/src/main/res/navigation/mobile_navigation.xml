@@ -60,7 +60,16 @@
         android:id="@+id/navigation_albumLibraryFragment"
         android:name="com.uv.lismusicjava.ui.library.Album.AlbumLibraryFragment"
         android:label="fragment_album_library"
-        tools:layout="@layout/fragment_album_library" />
+        tools:layout="@layout/fragment_album_library" >
+        <argument
+            android:name="album"
+            app:argType="com.uv.lismusicjava.Albums.Album"
+            app:nullable="true" />
+        <action
+            android:id="@id/action_AlbumLibraryFragment_to_albumTracksFragment"
+            app:destination="@id/albumTracksFragment">
+        </action>
+    </fragment>
 
     <fragment
         android:id="@+id/trackFragment"
