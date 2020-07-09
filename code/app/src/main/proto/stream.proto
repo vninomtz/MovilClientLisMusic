@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_package =  "com.uv.lismusicjava";
+
+package stream;
+
+
+message TrackRequest {
+  string idTrack = 1;
+  enum Quality {
+    HIGH = 0;
+    MIDDLE = 1;
+    SHORT = 2;
+  }
+  Quality quality = 2;
+}
+
+message TrackSample {
+  bytes audio = 1;
+}
+
+service StreamingService {
+  rpc GetTrackAudio (TrackRequest) returns (stream TrackSample);
+}
