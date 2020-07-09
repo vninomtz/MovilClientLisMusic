@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         buttonLoginSystem.setOnClickListener(v -> {
-            /*loginViewModel.validateFieldsLogin(editTextUser.getText().toString(), editTextPassword.getText().toString());
+            loginViewModel.validateFieldsLogin(editTextUser.getText().toString(), editTextPassword.getText().toString());
 
            loginViewModel.getLoginResponse().observe(this, response ->{
                 if(response != null){
@@ -110,10 +110,10 @@ public class LoginActivity extends AppCompatActivity {
 
             loginViewModel.getLoginError().observe(this, messageError -> {
                 Toast.makeText(this, messageError, Toast.LENGTH_SHORT).show();
-            });*/
+            });
 
 
-            try {
+            /*try {
                 System.out.println("Iniciando grpc");
 
                 //  mChannel = ManagedChannelBuilder.forAddress( "10.0.2.2",8000).usePlaintext().build();
@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
-            System.out.println("Conexión realizada ");
+            System.out.println("Conexión realizada ");*/
         });
 
     }
