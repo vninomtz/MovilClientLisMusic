@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,8 +16,8 @@ import android.widget.Toast;
 
 import com.uv.lismusicjava.Albums.Album;
 import com.uv.lismusicjava.R;
+import com.uv.lismusicjava.ui.library.LibraryFragmentDirections;
 import com.uv.lismusicjava.ui.library.adapters.AlbumAdapter;
-import com.uv.lismusicjava.ui.library.artistalbums.ArtistAlbumFragmentDirections;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,8 +64,7 @@ public class AlbumLibraryFragment extends Fragment implements AlbumAdapter.ListI
     @Override
     public void onListItemClick(int clickedItem) {
         Album albumSelected = arrayListAlbum.get(clickedItem);
-       // AlbumLibraryFragmentDirections.ActionAlbumLibraryFragmentToAlbumTracksFragment action = AlbumLibraryFragmentDirections.actionAlbumLibraryFragmentToAlbumTracksFragment();
-        String message = "Album clicked: " + arrayListAlbum.get(clickedItem).getTitle();
-        Toast.makeText(getContext(),message, Toast.LENGTH_SHORT).show();
+        LibraryFragmentDirections.ActionNavigationLibraryToAlbumTracksFragment action = LibraryFragmentDirections.actionNavigationLibraryToAlbumTracksFragment(null, albumSelected);
+        NavHostFragment.findNavController(this).navigate(action);
     }
 }

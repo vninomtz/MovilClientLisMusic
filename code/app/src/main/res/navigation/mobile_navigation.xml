@@ -41,6 +41,9 @@
         <action
             android:id="@+id/action_navigation_artist_to_artistAlbumFragment"
             app:destination="@+id/artistAlbumFragment"/>
+        <action
+            android:id="@+id/action_navigation_library_to_albumTracksFragment"
+            app:destination="@id/albumTracksFragment" />
 
     </fragment>
 
@@ -65,10 +68,6 @@
             android:name="album"
             app:argType="com.uv.lismusicjava.Albums.Album"
             app:nullable="true" />
-        <action
-            android:id="@id/action_AlbumLibraryFragment_to_albumTracksFragment"
-            app:destination="@id/albumTracksFragment">
-        </action>
     </fragment>
 
     <fragment
