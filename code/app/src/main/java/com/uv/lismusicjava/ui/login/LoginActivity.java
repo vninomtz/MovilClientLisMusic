@@ -2,7 +2,9 @@ package com.uv.lismusicjava.ui.login;
 
 import android.content.Intent;
 import android.graphics.Paint;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,8 +21,20 @@ import com.facebook.login.widget.LoginButton;
 import com.uv.lismusicjava.Account.AccountRepository;
 import com.uv.lismusicjava.HomeActivity;
 import com.uv.lismusicjava.R;
+import com.uv.lismusicjava.Stream;
+import com.uv.lismusicjava.StreamingServiceGrpc;
 import com.uv.lismusicjava.ui.Account.RegisterAccountActivity;
 import com.uv.lismusicjava.utils.SingletonAccount;
+
+import io.grpc.StatusRuntimeException;
+import io.grpc.android.AndroidChannelBuilder;
+
+import java.lang.ref.WeakReference;
+import java.util.Iterator;
+
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import io.grpc.stub.ClientCallStreamObserver;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -78,11 +92,15 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
         });
 
+        ManagedChannel mChannel = AndroidChannelBuilder.forAddress("10.0.2.2", 8000)
+                .context(getApplicationContext())
+                .build();
+
 
         buttonLoginSystem.setOnClickListener(v -> {
-            loginViewModel.validateFieldsLogin(editTextUser.getText().toString(), editTextPassword.getText().toString());
+            /*loginViewModel.validateFieldsLogin(editTextUser.getText().toString(), editTextPassword.getText().toString());
 
-            loginViewModel.getLoginResponse().observe(this, response ->{
+           loginViewModel.getLoginResponse().observe(this, response ->{
                 if(response != null){
                     response.getAccount().setAccesToken(response.getAccessToken());
                     SingletonAccount.setSingletonAccount(response.getAccount());
@@ -92,10 +110,35 @@ public class LoginActivity extends AppCompatActivity {
 
             loginViewModel.getLoginError().observe(this, messageError -> {
                 Toast.makeText(this, messageError, Toast.LENGTH_SHORT).show();
-            });
+            });*/
+
+
+            try {
+                System.out.println("Iniciando grpc");
+
+                //  mChannel = ManagedChannelBuilder.forAddress( "10.0.2.2",8000).usePlaintext().build();
+                StreamingServiceGrpc.StreamingServiceBlockingStub stub = StreamingServiceGrpc.newBlockingStub(mChannel);
+                Stream.TrackRequest request = Stream.TrackRequest.newBuilder().setIdTrack("123").setQuality(Stream.TrackRequest.Quality.HIGH).build();
+                System.out.println(request.getIdTrack());
+                Iterator<Stream.TrackSample> trackSamples;
+                trackSamples = stub.getTrackAudio(request);
+
+                while (trackSamples.hasNext()) {
+                    Stream.TrackSample feature = trackSamples.next();
+                    System.out.println("Entró");
+                }
+
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+            System.out.println("Conexión realizada ");
         });
 
     }
+
+
+
+
 
     private void goHomeScreen() {
         Intent intent = new Intent(this, HomeActivity.class);
