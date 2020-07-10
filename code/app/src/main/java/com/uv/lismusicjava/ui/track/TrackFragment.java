@@ -12,9 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -90,7 +93,18 @@ public class TrackFragment extends Fragment implements TrackAdapter.OnItemClickL
 
     @Override
     public void onOptionsClick(int position) {
-        String message = "Options of track: " + listTracks.get(position).getTitle();
-        Toast.makeText(getContext(),message, Toast.LENGTH_SHORT).show();
+        PopupMenu popupMenu = new PopupMenu(getContext(), getView());
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Toast.makeText(getContext(),item.getTitle(),Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+        inflater.inflate(R.menu.menu_tracks, popupMenu.getMenu());
+        popupMenu.show();
+
+
     }
 }
