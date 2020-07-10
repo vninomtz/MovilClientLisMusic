@@ -11,6 +11,9 @@ apply plugin: "androidx.navigation.safeargs"
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
+    dataBinding{
+        enabled=true
+    }
 
     defaultConfig {
         applicationId "com.uv.lismusicjava"

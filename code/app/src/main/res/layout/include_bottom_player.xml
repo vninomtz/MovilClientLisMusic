@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/sizeBottomPlayer"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/primaryLightColor">
-
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sizeBottomPlayer"
+        android:background="@color/primaryLightColor">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageViewRadioIcon"
@@ -89,8 +90,8 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:padding="@dimen/padding_16dp"
-            app:srcCompat="@drawable/ic_baseline_favorite_24"
-            android:tint="@color/colorRed"
-            />
+            app:srcCompat="@drawable/ic_baseline_favorite_24"/>
 
     </RelativeLayout>
+</layout>
+
