@@ -60,8 +60,6 @@ public class LoginActivity extends AppCompatActivity {
         principalLogo.setImageResource(R.drawable.lismusic3);
         newAccountTextView = findViewById(R.id.newAccount);
         newAccountTextView.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
-        resetPasswordTextView = findViewById(R.id.resetPassword);
-        resetPasswordTextView.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
         callbackManager = CallbackManager.Factory.create();
         loginButton = findViewById(R.id.login_button);
         loginButton.setReadPermissions("email", "public_profile");
@@ -150,7 +148,6 @@ public class LoginActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP  | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){

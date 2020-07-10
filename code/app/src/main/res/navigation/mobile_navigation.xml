@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_navigation_library_to_albumTracksFragment"
             app:destination="@id/albumTracksFragment" />
+        <action
+            android:id="@+id/action_navigation_library_to_newPlaylistFragment"
+            app:destination="@id/newPlaylistFragment" />
 
     </fragment>
 
@@ -110,6 +113,13 @@
             app:argType="com.uv.lismusicjava.Albums.Album"
             app:nullable="true" />
     </fragment>
+
+    <fragment
+        android:id="@+id/newPlaylistFragment"
+        android:name="com.uv.lismusicjava.ui.library.playlist.NewPlaylistFragment"
+        android:label="newPlaylist_fragment"
+        tools:layout="@layout/fragment_new_playlist"
+        ></fragment>
 
 
 
