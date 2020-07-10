@@ -70,11 +70,6 @@ public class TrackFragment extends Fragment implements TrackAdapter.OnItemClickL
         }
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        System.out.println("Se inicia la actividad");
-    }
 
     private void setupRecyclerView(){
         if(trackAdapter == null){
