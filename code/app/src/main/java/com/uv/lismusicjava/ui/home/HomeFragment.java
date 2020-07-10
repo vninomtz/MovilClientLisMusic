@@ -14,38 +14,69 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.uv.lismusicjava.R;
+import com.uv.lismusicjava.domain.Gender;
+import com.uv.lismusicjava.playlist.Playlist;
+import com.uv.lismusicjava.ui.home.Apadter.GenderAdapter;
+import com.uv.lismusicjava.ui.home.Apadter.HomeAdapter;
+
+import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    private ArrayList<Playlist> listRecommendatios;
+    private RecyclerView recyclerRecommendatios, recyclerGender;
+    private ArrayList<Gender> genderList;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        genderList = new ArrayList<>();
+        listRecommendatios = new ArrayList<>();
 
+        recyclerRecommendatios = view.findViewById(R.id.recyclerViewRecommendations);
+        recyclerRecommendatios.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        loadRecommendations();
 
+        recyclerGender = view.findViewById(R.id.recyclerViewGenders);
+       // recyclerGender.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        recyclerGender.setLayoutManager(new GridLayoutManager(getContext(),2));
+        loadGenders();
 
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-        return root;
+        HomeAdapter adapter = new HomeAdapter(listRecommendatios);
+        recyclerRecommendatios.setAdapter(adapter);
+
+        GenderAdapter genderAdapter = new GenderAdapter(genderList);
+        recyclerGender.setAdapter(genderAdapter);
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        Button btnTest = view.findViewById(R.id.test_fragment_track);
-        btnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
+    }
+    public void loadRecommendations(){
+        listRecommendatios.add(new Playlist("Los más populares de LisMusic", "12"));
+        listRecommendatios.add(new Playlist("LisMusic", "12"));
+        listRecommendatios.add(new Playlist("Top Global", "12"));
+        listRecommendatios.add(new Playlist("Top Mexico", "12"));
+        listRecommendatios.add(new Playlist("Top Argentina", "12"));
+        listRecommendatios.add(new Playlist("Top Latin", "12"));
+        listRecommendatios.add(new Playlist("Top Old", "12"));
+        listRecommendatios.add(new Playlist("Top Romantic", "12"));
+    }
+
+    private void loadGenders(){
+        genderList.add(new Gender("Hip-hop", R.drawable.hiphop));
+        genderList.add(new Gender("Pop", R.drawable.pop));
+        genderList.add(new Gender("Romantic", R.drawable.romantic));
+        genderList.add(new Gender("Old", R.drawable.old));
+        genderList.add(new Gender("Mexican regional", R.drawable.mexican));
+        genderList.add(new Gender("Rock", R.drawable.rock));
+        genderList.add(new Gender("Latin", R.drawable.latin));
     }
 }

@@ -46,6 +46,12 @@ public class Playlist implements Parcelable {
         publicPlaylist = in.readByte() != 0;
     }
 
+    public Playlist(String title, String cover) {
+        this.title = title;
+        this.cover = cover;
+
+    }
+
     public static final Creator<Playlist> CREATOR = new Creator<Playlist>() {
         @Override
         public Playlist createFromParcel(Parcel in) {
