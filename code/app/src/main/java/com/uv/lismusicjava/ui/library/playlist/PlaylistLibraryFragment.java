@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.uv.lismusicjava.R;
@@ -32,12 +33,16 @@ public class PlaylistLibraryFragment extends Fragment implements PlaylistAdapter
     ArrayList<Playlist> listPlaylist;
     PlaylistLibraryViewModel playlistViewModel;
     PlaylistAdapter playlistAdapter;
+    ImageView button_addPlaylist;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View viewFragment = inflater.inflate(R.layout.fragment_playlist_library, container, false);
         recyclerPlaylist = viewFragment.findViewById(R.id.recyclerView_playlist_library);
+        button_addPlaylist = viewFragment.findViewById(R.id.btn_add_playlist);
+
+
         return viewFragment;
     }
 
@@ -58,6 +63,14 @@ public class PlaylistLibraryFragment extends Fragment implements PlaylistAdapter
             Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();
         });
 
+        button_addPlaylist.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                goToAddNewPlaylist();
+            }
+        });
+
+
+
     }
 
     private void setupRecyclerView() {
@@ -76,5 +89,9 @@ public class PlaylistLibraryFragment extends Fragment implements PlaylistAdapter
         Playlist playlist = listPlaylist.get(clickedItem);
         LibraryFragmentDirections.ActionNavigationLibraryToTrackFragment action = LibraryFragmentDirections.actionNavigationLibraryToTrackFragment(playlist);
         NavHostFragment.findNavController(this).navigate(action);
+    }
+
+    public void goToAddNewPlaylist(){
+        NavHostFragment.findNavController(this).navigate(LibraryFragmentDirections.actionNavigationLibraryToNewPlaylistFragment());
     }
 }
